@@ -62,6 +62,66 @@ class DataBase:
             print(str(e))
             return False
 
+    def addTeacherMenu(self, title, url):
+        try:
+            self.__cur.execute("INSERT INTO teachermenu VALUES (NULL, ?, ?)", (title,url))
+            self.__db.commit()
+        except sq.Error as e:
+            print(str(e))
+            return False
+        return True
+
+    def delTeacherMenu(self, id=0):
+        try:
+            if id == 0:
+                self.__cur.execute("DELETE FROM teachermenu")
+            else:
+                self.__cur.execute(f"DELETE FROM teachermenu WHERE id == {id}")
+            self.__db.commit()
+        except sq.Error as e:
+            print(str(e))
+            return False
+        return True
+
+    def getTeacherMenu(self):
+        try:
+            self.__cur.execute("SELECT * FROM teachermenu")
+            res = self.__cur.fetchall()
+            if res: return res
+        except sq.Error as e:
+            print(str(e))
+            return False
+
+    def addStudentMenu(self, title, url):
+        try:
+            self.__cur.execute("INSERT INTO studentmenu VALUES (NULL, ?, ?)", (title,url))
+            self.__db.commit()
+        except sq.Error as e:
+            print(str(e))
+            return False
+        return True
+
+    def delStudentMenu(self, id=0):
+        try:
+            if id == 0:
+                self.__cur.execute("DELETE FROM studentmenu")
+            else:
+                self.__cur.execute(f"DELETE FROM studentmenu WHERE id == {id}")
+            self.__db.commit()
+        except sq.Error as e:
+            print(str(e))
+            return False
+        return True
+
+    def getStudentMenu(self):
+        try:
+            self.__cur.execute("SELECT * FROM studentmenu")
+            res = self.__cur.fetchall()
+            if res: return res
+        except sq.Error as e:
+            print(str(e))
+            return False
+
 
 
 
