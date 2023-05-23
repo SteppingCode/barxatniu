@@ -1,52 +1,74 @@
 html, body {
-font-size: 22px;
-margin: 0;
-padding: 0;
+    font-size: 22px;
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
-padding: 10px;
+    padding: 10px;
 }
 
 ul.menu {
-list-style: none;
-background: #3F4137;
-height: 60px;
-margin: 0px;
-padding: 0px;
-color: #fdc073;
-font-size: 26px;
-overflow: hidden;
+    list-style: none;
+    background: #3F4137;
+    height: 60px;
+    margin: 0px;
+    padding: 0px;
+    color: #fdc073;
+    font-size: 26px;
+    overflow: hidden;
 }
 
 ul.menu li {
-float: left;
-margin: 10px 40px 0px 50px;
+    float: left;
+    margin: 10px 40px 0px 50px;
 }
 
 ul.menu li .last{
-float: right;
+    float: right;
 }
 
 ul.menu a {
-color: #fdc073;
-text-decoration: none;
+    color: #fdc073;
+    text-decoration: none;
 }
 
 ul.menu a:hover {
-color:#8785A2;
+    color:#8785A2;
 }
 
 .flash {
-padding: 10px;
+    padding: 10px;
 }
 
 .flash.success{
-border: 1px solid #21DB56;
-background: #AEFFC5;
+    border: 1px solid #21DB56;
+    background: #AEFFC5;
 }
 
 .flash.error{
-border: 1px solid #FF4334;
-background: #FF9C9C;
+    border: 1px solid #FF4334;
+    background: #FF9C9C;
+}
+
+footer {
+    display: inline-block;
+    position: absolute;
+    margin-top: 150%;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 50px;
+    background-color: lightgrey;
+    font-family: 'Disket Mono', sans-serif;
+}
+
+footer #author {
+    margin-right: 50px;
+}
+
+footer a {
+    text-decoration: none;
+}
+footer #other {
+    padding-right: 100px;
 }

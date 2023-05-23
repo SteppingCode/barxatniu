@@ -122,6 +122,56 @@ class DataBase:
             print(str(e))
             return False
 
+    def addUser(self, firstname, secondname, thirdname, age, status):
+        try:
+            self.__cur.execute("INSERT INTO users VALUES (NULL, ?, ?, ?, ?, ?)", \
+                               (firstname, secondname, thirdname, age, status))
+            self.__db.commit()
+        except sq.Error as e:
+            print(str(e))
+            return False
+        return True
+
+    def delUser(self, id=0):
+        try:
+            if id == 0:
+                self.__cur.execute("DELETE FROM users")
+            else:
+                self.__cur.execute(f"DELETE FROM users WHERE id == {id}")
+            self.__db.commit()
+        except sq.Error as e:
+            print(str(e))
+            return False
+        return True
+
+    def getUsers(self, status):
+        try:
+            self.__cur.execute(f"SELECT * FROM users WHERE status = {status}")
+            res = self.__cur.fetchall()
+            if res: return res
+        except sq.Error as e:
+            print(str(e))
+            return False
+
+    """def getUser(self):
+        try:
+            self.__cur.execute("SELECT * FROM users WHERE")
+            res = self.__cur.fetchone()
+            if res: return res
+        except sq.Error as e:
+            print(str(e))
+            return False"""
+
+    def getStatus(self, firstname, secondname, thirdname):
+        try:
+            self.__cur.execute(f'SELECT status FROM users WHERE firstname = {firstname}, \
+            secondname = {secondname}, thirdname = {thirdname}')
+            res = self.__cur.fetchone()
+            if res: return res
+        except sq.Error as e:
+            print(str(e))
+            return False
+
 
 
 
@@ -130,3 +180,4 @@ if __name__ == "__main__":
     db = DataBase(db)
     create_db()
     #print(db.addMenu('Главная', 'start_page'))
+    print(db.addMenu('Войти', 'login'))
