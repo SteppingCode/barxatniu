@@ -4,6 +4,7 @@ import sqlite3 as sq
 from flask import Flask, redirect, url_for, render_template, g, request, session
 from config import Config
 from database.sqldb import DataBase
+import json
 import git
 
 #variables
@@ -41,7 +42,7 @@ def start_page():
     database = DataBase(db)
     #login
     if request.method == 'POST' and database.getUser(request.form['name'], request.form['psw']):
-        session['userlogged'] = database.getUser(request.form['name'], request.form['psw'])
+        session['userlogged'] = request.form['name']
         return redirect(url_for('start_page'))
     return render_template('index.html', title='Главная', menu=database.getMenu())
 
@@ -51,10 +52,16 @@ def admin_page():
     db = connect_db()
     database = DataBase(db)
     if 'userlogged' in session:
-        print(session['userlogged'])
         if database.getStatus(session['userlogged']) == 'admin':
             return render_template('admin.html', menu=database.getMenu())
     return redirect(url_for('start_page'))
+
+@app.route('/quit')
+def quit():
+    if 'userlogged' in session:
+        return redirect(url_for('start_page')), session.clear()
+    else:
+        return redirect(url_for('start_page'))
 
 #game list
 @app.route('/game_list')

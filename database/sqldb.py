@@ -163,7 +163,7 @@ class DataBase:
 
     """def getUser(self):
         try:
-            self.__cur.execute("SELECT * FROM users WHERE")
+            self.__cur.execute("SELECT * FROM users WHERE nick = ?", (nick,))
             res = self.__cur.fetchone()
             if res: return res
         except sq.Error as e:
@@ -172,9 +172,9 @@ class DataBase:
 
     def getStatus(self, nick):
         try:
-            self.__cur.execute(f'SELECT status FROM users WHERE nick = ?', (nick,))
+            self.__cur.execute(f'SELECT * FROM users WHERE nick = ?', (nick,))
             res = self.__cur.fetchone()
-            if res: return res
+            if res: return res[5]
         except sq.Error as e:
             print(str(e))
             return False
@@ -228,3 +228,4 @@ if __name__ == "__main__":
     #print(db.addMenu('Список игр', 'game_list'))
     #print(db.addUser('bIades', '123', '14', 'Степин Евгений Андреевич', 'admin'))
     #print(db.addUser('huilan91', '111', '15', 'Палеев Глеб Андреевич', 'admin'))
+    #print(db.addUser('teach', '1', '28', 'Вася Пупкин', 'teacher'))
