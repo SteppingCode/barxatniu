@@ -20,13 +20,11 @@ ul.menu {
 }
 
 ul.menu li {
-    float: left;
+    float: right;
     margin: 10px 40px 0px 50px;
 }
 
-ul.menu li .last{
-    float: right;
-}
+
 
 ul.menu a {
     color: #fdc073;
@@ -69,6 +67,6 @@ footer #author {
 footer a {
     text-decoration: none;
 }
-footer #other {
-    padding-right: 100px;
+footer #other a {
+    padding-right: 80px;
 }

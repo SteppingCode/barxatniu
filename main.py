@@ -1,7 +1,7 @@
 #imports
 import os.path
 import sqlite3 as sq
-from flask import Flask, redirect, url_for, render_template, g, request
+from flask import Flask, redirect, url_for, render_template, g, request, session
 from config import Config
 from database.sqldb import DataBase
 import git
@@ -34,12 +34,34 @@ def webhook():
         return 'Возникла ошибка', 400"""
 
 
-#redirect to start page
-@app.route('/')
+#start page
+@app.route('/', methods=['POST', 'GET'])
 def start_page():
     db = connect_db()
     database = DataBase(db)
+    #login
+    if request.method == 'POST' and database.getUser(request.form['name'], request.form['psw']):
+        session['userlogged'] = database.getUser(request.form['name'], request.form['psw'])
+        return redirect(url_for('start_page'))
     return render_template('index.html', title='Главная', menu=database.getMenu())
+
+#admin page
+@app.route('/admin', methods=['POST', 'GET'])
+def admin_page():
+    db = connect_db()
+    database = DataBase(db)
+    if 'userlogged' in session:
+        print(session['userlogged'])
+        if database.getStatus(session['userlogged']) == 'admin':
+            return render_template('admin.html', menu=database.getMenu())
+    return redirect(url_for('start_page'))
+
+#game list
+@app.route('/game_list')
+def game_list():
+    db = connect_db()
+    database = DataBase(db)
+    return render_template('game_list.html', menu=database.getMenu(), games=database.getGames())
 
 if __name__ == "__main__":
     app.run(debug=True)

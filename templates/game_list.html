@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+{{ super() }}
+{% if games %}
+    {% for g in games %}
+        <h1>{{g.title}}</h1>
+        {% if g.info[100] %}
+            <p>{{g.info[:100]}}...</p>
+        {% else %}
+            <p>{{g.info[:100]}}</p>
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <h1>Упс. Пока что тут ничего нет(</h1>
+{% endif %}
+{% endblock %}

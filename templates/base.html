@@ -61,19 +61,21 @@
 {% block content %}
     {%- block menu -%}
         <ul class="menu">
+            <a href="{{url_for('start_page')}}"><img src="/static/img/favicon.png" width="40" height="40" style="margin-top: 6px; float: left; margin-left: 18px;"></a>
             {% for m in menu -%}
                 <li><a href="{{url_for(m.url)}}">{{m.title}}</a></li>
             {% endfor -%}
         </ul>
     {% endblock menu -%}
 <footer>
-    <span id="author"><a href="{{url_for('start_page')}}"><img src="/static/img/favicon.png" width="35px" height="35px"></a> &copy; 2023 <a href="https://vk.com/z.stepin">Степин Е.А.</a> и <a href="https://vk.com/glebuuus">Палеев Г.А.</a></span>
+    <span id="author"><a href="{{url_for('start_page')}}"><img src="/static/img/favicon.png" width="40px" height="40px" style="margin-right: 12px;"></a> &copy; 2023 <a href="https://vk.com/z.stepin">Степин Е.А.</a> и <a href="https://vk.com/glebuuus">Палеев Г.А.</a></span>
     <span id="other">
         <a href="https://github.com/dodik337/barxatniu">Source code</a>
         <a href="#contact">Contact</a>
         <a href="#discord">Discord</a>
         <a href="#bug report">Bug report</a>
     </span>
+
 
 </footer>
 {% endblock %}
