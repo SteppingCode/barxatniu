@@ -69,7 +69,7 @@
     }
 
 </style>
-<img src="https://phonoteka.org/uploads/posts/2021-06/1624303642_29-phonoteka_org-p-oboi-na-rabochii-stol-more-plyazh-krasivo-32.jpg" width="100%" height="auto">
+<video src="/static/video/videoplayback.mp4" width="100%" height="auto" loop autoplay muted typeof="mp4" style=""></video>
 <div id="info">
     <p><strong>Что такое (Название сайта)?</strong></p>
     <p>Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла </p>
@@ -91,11 +91,11 @@
     <form class="modal-content" method="post">
         <div class="container">
             <h1 style="margin-left: 40%;">Вход</h1>
-            <input type="text" placeholder="ФИО" name="name" required>
-            <input type="password" placeholder="Пароль" name="psw" required>
+            <input type="text" placeholder="Логин" name="name" required style="border-radius: 10px;">
+            <input type="password" placeholder="Пароль" name="psw" required style="border-radius: 10px;">
             <label><input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px">Запомнить меня</label>
             <button type="submit" class="signupbtn">Вход</button>
-            <p>Еще нету аккаунта? <a href="#">Создать аккаунт</a></p>
+            <p>Еще нету аккаунта? <a href="{{url_for('game_list')}}">Создать аккаунт</a></p>
     </div>
   </form>
 </div>
