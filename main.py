@@ -41,8 +41,13 @@ def start_page():
     db = connect_db()
     database = DataBase(db)
     #login
-    if request.method == 'POST' and database.getUser(request.form['name'], request.form['psw']):
-        session['userlogged'] = request.form['name']
+    if request.method == 'POST' and database.getUser(request.form['nick'], request.form['psw']):
+        session['userlogged'] = request.form['nick']
+        return redirect(url_for('start_page'))
+    #register
+    if request.method == 'POST' and database.addUser(request.form['regnick'], request.form['regpsw'], \
+                    request.form['age'], request.form['regname'], 'student'):
+        session['userlogged'] = request.form['regnick']
         return redirect(url_for('start_page'))
     return render_template('index.html', title='Главная', menu=database.getMenu())
 
@@ -56,6 +61,7 @@ def admin_page():
             return render_template('admin.html', menu=database.getMenu())
     return redirect(url_for('start_page'))
 
+#quit
 @app.route('/quit')
 def quit():
     if 'userlogged' in session:

@@ -90,13 +90,21 @@
 <div id="id01" class="modal">
     <form class="modal-content" method="post">
         <div class="container">
+            <p><button type="button">Войти как ученик</button><button type="button">Войти как учитель</button></p>
             <h1 style="margin-left: 40%;">Вход</h1>
-            <input type="text" placeholder="Логин" name="name" required style="border-radius: 10px;">
+            <input type="text" placeholder="Логин" name="nick" required style="border-radius: 10px;">
             <input type="password" placeholder="Пароль" name="psw" required style="border-radius: 10px;">
             <label><input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px">Запомнить меня</label>
             <button type="submit" class="signupbtn">Вход</button>
             <p>Еще нету аккаунта? <a href="{{url_for('game_list')}}">Создать аккаунт</a></p>
-    </div>
+        </div>
+        <div class="container">
+            <h1 style="margin-left: 40%;">Регистрация</h1>
+            <input type="text" placeholder="Логин" name="nick" required style="border-radius: 10px;">
+            <input type="password" placeholder="Пароль" name="psw" required style="border-radius: 10px;">
+            <label><input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px">Запомнить меня</label>
+            <button type="submit" class="signupbtn">Зарегистрироваться</button>
+        </div>
   </form>
 </div>
 

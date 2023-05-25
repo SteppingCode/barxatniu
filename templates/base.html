@@ -65,6 +65,9 @@
             {% for m in menu -%}
                 <li><a href="{{url_for(m.url)}}">{{m.title}}</a></li>
             {% endfor -%}
+            {% if 'userlogged' in session %}
+                <li><a href="{{url_for('quit')}}">Выход</a></li>
+            {% endif %}
         </ul>
     {% endblock menu -%}
 <footer>
