@@ -70,26 +70,6 @@
         width: 35%;
         height: auto;
     }
-    .regis {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        padding-top: 50px;
-        background-color: rgba(240, 240, 240, .5);
-    }
-
-    .regis-content {
-        background-color: #fefefe;
-        margin: 5% auto 15% auto;
-        border: 1px solid #888;
-        width: 35%;
-        height: auto;
-    }
 
 </style>
 <video src="/static/video/videoplayback.mp4" width="100%" height="auto" loop autoplay muted typeof="mp4" style=""></video>
@@ -114,8 +94,7 @@
     <form class="modal-content" method="post">
         <div class="container">
             <h1 style="text-align: center;">
-                <a onclick="document.getElementById('id01').style.display='block'; regis.style.display = 'none';" style="color: purple;">Вход</a>  |
-                <a onclick="document.getElementById('id02').style.display='block'; modal.style.display = 'none';">Регистрация</a>
+                <a onclick="document.getElementById('id01').style.display='block';">Вход</a>
             </h1>
             <div style="display: flex; flex-direction: column; padding-top: 20px;">
                 <input type="text" placeholder="Логин" name="nick" required>
@@ -123,43 +102,17 @@
                 <label><input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px">Запомнить меня</label>
             </div>
             <button id="btn" type="submit" class="signupbtn">Вход</button>
+            <p>Еще нету аккаунта? <a onclick="modal.style.display = 'none';" href="{{url_for('register')}}">Создать аккаунт</a></p>
         </div>
     </form>
 </div>
-<div id="id02" class="regis">
-    <form class="regis-content" method="post">
-        <div class="container">
-            {% for cat, msg in get_flashed_messages(True) %}
-                <div class="flash {{cat}}"> {{msg}}</div>
-            {% endfor %}
-            <h1 style="text-align: center;">
-                <a onclick="document.getElementById('id01').style.display='block'; regis.style.display = 'none';">Вход</a> |
-                <a onclick="document.getElementById('id02').style.display='block'; modal.style.display = 'none';" style="color: purple;">Регистрация</a>
-            </h1>
-            <div style="display: flex; flex-direction: column; padding-top: 20px;">
-                <input type="text" placeholder="Логин" name="regnick" required>
-                <input type="text" placeholder="Возраст" name="age" required>
-                <input type="text" placeholder="Полное имя" name="regname" required>
-                <input type="password" placeholder="Пароль" name="regpsw" required>
-                <input type="password" placeholder="Повторите пароль" name="regpsw2" required>
-                <label><input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px">Запомнить меня</label>
-            </div>
-            <button id="btn" type="button" class="signupbtn" style="color: red;">Зарегистрироваться</button>
-        </div>
-    </form>
-</div>
-
 
 <script>
 var modal = document.getElementById('id01');
-var regis = document.getElementById('id02');
 
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
-  }
-  if (event.target == regis) {
-    regis.style.display = "none";
   }
 }
 </script>

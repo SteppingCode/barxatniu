@@ -40,12 +40,18 @@ def webhook():
 def start_page():
     db = connect_db()
     database = DataBase(db)
+    #login
     if request.method == 'POST':
-        #login
         if database.getUser(request.form['nick'], request.form['psw']):
             session['userlogged'] = request.form['nick']
             return redirect(url_for('start_page'))
-        #register
+    return render_template('index.html', title='Главная', menu=database.getMenu())
+
+#register
+@app.route('/register', methods=['POST', 'GET'])
+def register():
+    db = connect_db()
+    database = DataBase(db)
     if request.method == 'POST':
         if request.form['regpsw'] == request.form['regpsw2']:
             if database.addUser(request.form['regnick'], request.form['regpsw'], \
@@ -54,7 +60,7 @@ def start_page():
                 return redirect(url_for('start_page'))
         else:
             flash('Invalid password', category='error')
-    return render_template('index.html', title='Главная', menu=database.getMenu())
+    return render_template('register.html', title='Регистрация', menu=database.getMenu())
 
 #admin page
 @app.route('/admin', methods=['POST', 'GET'])
