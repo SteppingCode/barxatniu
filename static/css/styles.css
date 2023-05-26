@@ -49,24 +49,4 @@ ul.menu a:hover {
     background: #FF9C9C;
 }
 
-footer {
-    display: inline-block;
-    position: absolute;
-    margin-top: 150%;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 50px;
-    background-color: lightgrey;
-    font-family: 'Disket Mono', sans-serif;
-}
 
-footer #author {
-    margin-right: 50px;
-}
-
-footer a {
-    text-decoration: none;
-}
-footer #other a {
-    padding-right: 80px;
-}
