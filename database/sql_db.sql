@@ -25,9 +25,9 @@ url text not null
 
 create table if not exists users (
 id integer primary key autoincrement,
-nick text not null,
+nick text not null unique,
 password text not null,
 age integer not null,
-name text null,
+name text null unique,
 status text not null
 );

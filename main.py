@@ -1,7 +1,7 @@
 #imports
 import os.path
 import sqlite3 as sq
-from flask import Flask, redirect, url_for, render_template, g, request, session
+from flask import Flask, redirect, url_for, render_template, g, request, session, flash
 from config import Config
 from database.sqldb import DataBase
 import json
@@ -40,15 +40,20 @@ def webhook():
 def start_page():
     db = connect_db()
     database = DataBase(db)
-    #login
-    if request.method == 'POST' and database.getUser(request.form['nick'], request.form['psw']):
-        session['userlogged'] = request.form['nick']
-        return redirect(url_for('start_page'))
-    #register
-    if request.method == 'POST' and database.addUser(request.form['regnick'], request.form['regpsw'], \
-                    request.form['age'], request.form['regname'], 'student'):
-        session['userlogged'] = request.form['regnick']
-        return redirect(url_for('start_page'))
+    if request.method == 'POST':
+        #login
+        if database.getUser(request.form['nick'], request.form['psw']):
+            session['userlogged'] = request.form['nick']
+            return redirect(url_for('start_page'))
+        #register
+    if request.method == 'POST':
+        if request.form['regpsw'] == request.form['regpsw2']:
+            if database.addUser(request.form['regnick'], request.form['regpsw'], \
+                                 request.form['age'], request.form['regname'], 'student'):
+                session['userlogged'] = request.form['regnick']
+                return redirect(url_for('start_page'))
+        else:
+            flash('Invalid password', category='error')
     return render_template('index.html', title='Главная', menu=database.getMenu())
 
 #admin page

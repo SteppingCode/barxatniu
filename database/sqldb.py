@@ -226,6 +226,7 @@ if __name__ == "__main__":
     db = DataBase(db)
     #create_db()
     #print(db.addMenu('Список игр', 'game_list'))
+    #print(db.delUser(0))
     #print(db.addUser('bIades', '123', '14', 'Степин Евгений Андреевич', 'admin'))
     #print(db.addUser('huilan91', '111', '15', 'Палеев Глеб Андреевич', 'admin'))
     #print(db.addUser('teach', '1', '28', 'Вася Пупкин', 'teacher'))
