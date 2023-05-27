@@ -22,17 +22,17 @@ def get_db():
         g.link_db = connect_db()
         return g.link_db
 
-"""
+
 #Server updating
 @app.route('/update_server', methods=['POST', 'GET'])
 def webhook():
     if request.method == 'POST':
-        repo = git.Repo('/home/ / ')
+        repo = git.Repo('/home//barxatniu')
         origin = repo.remotes.origin
         origin.pull()
         return 'Сайт обновился', 200
     else:
-        return 'Возникла ошибка', 400"""
+        return 'Возникла ошибка', 400
 
 
 #start page
@@ -44,7 +44,10 @@ def start_page():
     if request.method == 'POST':
         if database.getUser(request.form['nick'], request.form['psw']):
             session['userlogged'] = request.form['nick']
-            return redirect(url_for('start_page'))
+        else:
+            flash('Неверный логин или пароль', category='error')
+    if 'userlogged' in session:
+        return render_template('index.html', title='Главная', menu=database.getMenu(), status=database.getStatus(session['userlogged']))
     return render_template('index.html', title='Главная', menu=database.getMenu())
 
 #register
@@ -52,14 +55,18 @@ def start_page():
 def register():
     db = connect_db()
     database = DataBase(db)
+    if 'userlogged' in session:
+        return redirect(url_for('start_page'))
     if request.method == 'POST':
         if request.form['regpsw'] == request.form['regpsw2']:
             if database.addUser(request.form['regnick'], request.form['regpsw'], \
-                                 request.form['age'], request.form['regname'], 'student'):
+                                    request.form['age'], request.form['regname'], ''):
                 session['userlogged'] = request.form['regnick']
                 return redirect(url_for('start_page'))
+            else:
+                flash('Некорректные данные', category='error')
         else:
-            flash('Invalid password', category='error')
+            flash('Пароли не совпадают', category='error')
     return render_template('register.html', title='Регистрация', menu=database.getMenu())
 
 #admin page
@@ -81,7 +88,7 @@ def quit():
         return redirect(url_for('start_page'))
 
 #game list
-@app.route('/game_list')
+@app.route('/game_list', methods=['POST', 'GET'])
 def game_list():
     db = connect_db()
     database = DataBase(db)

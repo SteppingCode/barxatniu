@@ -8,74 +8,7 @@
         <title>{{title}}</title>
     {% endif %}
     <style>
-        ul.menu li {
-            float: left;
-            margin: 10px 40px 0px 50px;
-            position: relative;
-            cursor: pointer;
-            font-family: Arial;
-	        font-size: 22px;
-	        font-weight: bold;
-	        text-shadow:
-		    -0   -1px 1px #000000,
-		     0   -1px 1px #000000,
-		    -0    1px 1px #000000,
-		     0    1px 1px #000000,
-		    -1px -0   1px #000000,
-		     1px -0   1px #000000,
-		    -1px  0   1px #000000,
-		     1px  0   1px #000000,
-		    -1px -1px 1px #000000,
-		     1px -1px 1px #000000,
-		    -1px  1px 1px #000000,
-		     1px  1px 1px #000000,
-		    -1px -1px 1px #000000,
-		     1px -1px 1px #000000,
-		    -1px  1px 1px #000000,
-		     1px  1px 1px #000000;
-        }
-        ul.menu li .last{
-            float: right;
-        }
-        ul.menu a:hover {
-            color:lightblue;
-        }
-        ul.menu a::after {
-            content: "";
-            position: absolute;
-            bottom: -5px;
-            height: 2px;
-            width: 100%;
-            left: 0;
-            background-color: skyblue;
-            transition: 0.3s;
-            transition-timing-function: ease-in-out;
-            transform: scaleX(0);
-        }
-        ul.menu a:hover::after {
-            transform: scaleX(-1);
-        }
-        footer {
-            display: inline-block;
-            position: absolute;
-            margin-top: 150%;
-            box-sizing: border-box;
-            width: 100%;
-            padding: 50px;
-            background-color: lightgrey;
-            font-family: 'Disket Mono', sans-serif;
-        }
 
-        footer #author {
-            margin-right: 50px;
-        }
-
-        footer a {
-            text-decoration: none;
-        }
-        footer #other a {
-            padding-right: 80px;
-        }
     </style>
 </head>
 <body>
@@ -87,10 +20,41 @@
                 <li><a href="{{url_for(m.url)}}">{{m.title}}</a></li>
             {% endfor -%}
             {% if 'userlogged' in session %}
-                <li><a href="{{url_for('quit')}}">Выход</a></li>
+                {% if status == 'admin' %}
+                    <li><a href="{{url_for('admin_page')}}" style="float: right;">Админ</a></li>
+                {% endif %}
+                <li><a href="{{url_for('quit')}}" style="float: right;">Выход</a></li>
+            {% else %}
+                <li><a onclick="document.getElementById('id01').style.display='block'" style="float: right;">Вход</a></li>
             {% endif %}
         </ul>
     {% endblock menu -%}
+    <div id="id01" class="modal">
+        <form class="modal-content" method="post" action="{{url_for('start_page')}}">
+            <div class="container">
+                <h1 style="text-align: center; text-transform: uppercase; font-family: Arial; font-size: 35px;">Вход</h1>
+                {% for cat, msg in get_flashed_messages(True) %}
+                    <div class="flash {{cat}}"> {{msg}}</div>
+                {% endfor %}
+                <div style="display: flex; flex-direction: column; padding-top: 20px;">
+                    <input type="text" placeholder="Логин" name="nick" required pattern="[A-za-z1-0]*">
+                    <input type="password" placeholder="Пароль" name="psw" required pattern="[A-za-z1-0]*">
+                </div>
+                <button id="btn" type="submit" class="signupbtn">Вход</button>
+                <p>Еще нету аккаунта? <a onclick="modal.style.display = 'none';" href="{{url_for('register')}}">Создать аккаунт</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+var modal = document.getElementById('id01');
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
 <footer>
     <span id="author"><a href="{{url_for('start_page')}}"><img src="/static/img/favicon.png" width="40px" height="40px" style="margin-right: 12px;"></a> &copy; 2023 <a href="https://vk.com/z.stepin">Степин Е.А.</a> и <a href="https://vk.com/glebuuus">Палеев Г.А.</a></span>
     <span id="other">

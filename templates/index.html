@@ -11,68 +11,6 @@
         margin-left: 50px;
         margin-right: 50px;
     }
-    input[type=text], input[type=password] {
-        width: auto;
-        padding: 15px;
-        margin: 5px 0 22px 0;
-        border: none;
-    }
-
-    input[type=text]:focus, input[type=password]:focus {
-        background-color: #ddd;
-        outline: none;
-    }
-
-    #btn {
-        background-color: #4CAF50;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        cursor: pointer;
-        width: 100%;
-        opacity: 0.9;
-        border-radius: 10px;
-        font-size: 20px;
-    }
-
-    #btn:hover {
-        color: #4CAF50;
-        background-color: lightgrey;
-        opacity:1;
-        border: 1px black solid;
-    }
-
-    .container {
-        padding: 16px;
-    }
-    .container input {
-        border-radius: 10px;
-    }
-
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        padding-top: 50px;
-        background-color: rgba(240, 240, 240, .5);
-    }
-
-    .modal-content {
-        background-color: #fefefe;
-        margin: 5% auto 15% auto;
-        border: 1px solid #888;
-        width: 35%;
-        height: auto;
-    }
-    footer {
-        margin-top: 110%;
-    }
 </style>
 <video src="/static/video/videoplayback.mp4" width="100%" height="auto" loop autoplay muted typeof="mp4" style="position: relative;"></video>
 <div>
@@ -92,31 +30,4 @@
         <p><strong>Что такое (Название сайта)?</strong></p>
         <p>Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла Бла бла бла бла </p>
     </div>
-    <button id="btn" onclick="document.getElementById('id01').style.display='block'" style="width:200px; margin-left: 45%;">Вход</button>
-    <div id="id01" class="modal">
-        <form class="modal-content" method="post">
-            <div class="container">
-                <h1 style="text-align: center;">
-                    <a onclick="document.getElementById('id01').style.display='block';">Вход</a>
-                </h1>
-                <div style="display: flex; flex-direction: column; padding-top: 20px;">
-                    <input type="text" placeholder="Логин" name="nick" required>
-                    <input type="password" placeholder="Пароль" name="psw" required>
-                    <label><input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px">Запомнить меня</label>
-                </div>
-                <button id="btn" type="submit" class="signupbtn">Вход</button>
-                <p>Еще нету аккаунта? <a onclick="modal.style.display = 'none';" href="{{url_for('register')}}">Создать аккаунт</a></p>
-            </div>
-        </form>
-    </div>
-</div>
-<script>
-var modal = document.getElementById('id01');
-
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script>
 {% endblock %}

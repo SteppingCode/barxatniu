@@ -20,11 +20,35 @@ ul.menu {
 }
 
 ul.menu li {
-    float: right;
+    float: left;
     margin: 10px 40px 0px 50px;
+    position: relative;
+    cursor: pointer;
+    font-family: Arial;
+    font-size: 22px;
+    font-weight: bold;
+    text-shadow:
+    -0   -1px 1px #000000,
+     0   -1px 1px #000000,
+    -0    1px 1px #000000,
+     0    1px 1px #000000,
+    -1px -0   1px #000000,
+     1px -0   1px #000000,
+    -1px  0   1px #000000,
+     1px  0   1px #000000,
+    -1px -1px 1px #000000,
+     1px -1px 1px #000000,
+    -1px  1px 1px #000000,
+     1px  1px 1px #000000,
+    -1px -1px 1px #000000,
+     1px -1px 1px #000000,
+    -1px  1px 1px #000000,
+     1px  1px 1px #000000;
 }
 
-
+ul.menu li .last{
+    float: right;
+}
 
 ul.menu a {
     color: #fdc073;
@@ -32,7 +56,100 @@ ul.menu a {
 }
 
 ul.menu a:hover {
-    color:#8785A2;
+    color:lightblue;
+}
+
+ul.menu a::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    height: 2px;
+    width: 100%;
+    left: 0;
+    background-color: skyblue;
+    transition: 0.3s;
+    transition-timing-function: ease-in-out;
+    transform: scaleX(0);
+}
+
+ul.menu a:hover::after {
+    transform: scaleX(-1);
+}
+
+input[type=text], input[type=password] {
+    width: auto;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+#btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+#btn:hover {
+    color: #4CAF50;
+    background-color: lightgrey;
+    opacity:1;
+    border: 1px black solid;
+}
+
+.container {
+    padding: 16px;
+}
+
+.container input {
+    border-radius: 10px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding-top: 50px;
+    background-color: rgba(240, 240, 240, .5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto 15% auto;
+    border: 1px solid #888;
+    width: 35%;
+    height: auto;
+}
+
+footer {
+    margin-top: 130%;
+}
+
+input:invalid {
+    animation: shake 300ms;
+    color: rgb(255,  35, 35);
+}
+
+@keyframes shake {
+    25% { transform: translateX(4px); }
+    50% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
 }
 
 .flash {
@@ -47,6 +164,29 @@ ul.menu a:hover {
 .flash.error{
     border: 1px solid #FF4334;
     background: #FF9C9C;
+}
+
+footer {
+    display: inline-block;
+    position: absolute;
+    margin-top: 150%;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 50px;
+    background-color: lightgrey;
+    font-family: 'Disket Mono', sans-serif;
+}
+
+footer #author {
+    margin-right: 50px;
+}
+
+footer a {
+    text-decoration: none;
+}
+
+footer #other a {
+    padding-right: 80px;
 }
 
 

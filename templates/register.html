@@ -48,7 +48,7 @@
         width: 35%;
         height: auto;
         position: absolute;
-        z-index: 2;
+        z-index: 1;
         top: 0;
     }
     #video-full {
@@ -59,24 +59,68 @@
     footer {
         margin-top: 55%;
     }
+    #idbtn1, #idbtn2 {
+        border-radius: 10px;
+        color: green;
+        width: 100px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 5px;
+        color: red;
+        background: white;
+    }
+    #idbtn1.pressed, #idbtn2.pressed {
+        color: white;
+        background: red;
+    }
+    input:invalid {
+        animation: shake 300ms;
+        color: rgb(255,  35, 35);
+    }
+    @keyframes shake {
+        25% { transform: translateX(4px); }
+        50% { transform: translateX(-4px); }
+        75% { transform: translateX(4px); }
+    }
 </style>
 <video id="video-full" src="/static/video/videoplayback.mp4" width="100%;" height="auto" loop muted autoplay typeof="mp4">
 </video>
 <form class="regis-content" method="post">
     <div class="container">
+        <h1 style="text-align: center; text-transform: uppercase; font-family: Arial; font-size: 35px;">Регистрация</h1>
         {% for cat, msg in get_flashed_messages(True) %}
             <div class="flash {{cat}}"> {{msg}}</div>
         {% endfor %}
-        <h1 style="text-align: center;">Регистрация</h1>
         <div style="display: flex; flex-direction: column; padding-top: 20px;">
-            <input type="text" placeholder="Логин" name="regnick" required>
-            <input type="text" placeholder="Возраст" name="age" required>
-            <input type="text" placeholder="Полное имя" name="regname" required>
-            <input type="password" placeholder="Пароль" name="regpsw" required>
-            <input type="password" placeholder="Повторите пароль" name="regpsw2" required>
-            <label><input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px">Запомнить меня</label>
+            <input type="text" placeholder="Логин" name="regnick" required pattern="[A-za-z1-0]*">
+            <input type="text" placeholder="Возраст" name="age" required pattern="[1-0 ]*">
+            <input type="text" placeholder="Полное имя" name="regname" required pattern="[А-яа-я ]*">
+            <input type="password" placeholder="Пароль" name="regpsw" required pattern="[A-za-z1-0]*">
+            <input type="password" placeholder="Повторите пароль" name="regpsw2" required pattern="[A-za-z1-0]*">
         </div>
         <button id="btn" type="submit" class="signupbtn">Зарегистрироваться</button>
     </div>
 </form>
+<script>
+const idbtn1 = document.getElementById('idbtn1');
+const idbtn2 = document.getElementById('idbtn2');
+idbtn1.onclick = function(event) {
+  if (event.target == idbtn1) {
+    if (idbtn1.className == 'pressed' && event.target == idbtn1) {
+        idbtn1.classList.remove('pressed');
+    } else {
+        idbtn1.classList.add('pressed');
+    }
+  }
+}
+idbtn2.onclick = function(event) {
+if (event.target == idbtn2) {
+    if (idbtn2.className == 'pressed' && event.target == idbtn2) {
+        idbtn2.classList.remove('pressed');
+    } else {
+        idbtn2.classList.add('pressed');
+    }
+  }
+}
+</script>
 {% endblock %}
