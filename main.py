@@ -92,7 +92,10 @@ def quit():
 def game_list():
     db = connect_db()
     database = DataBase(db)
-    return render_template('game_list.html', menu=database.getMenu(), games=database.getGames(), status=database.getStatus(session['userlogged']))
+    if 'userlogged' in session:
+        return render_template('game_list.html', menu=database.getMenu(), games=database.getGames(),
+                               status=database.getStatus(session['userlogged']))
+    return render_template('game_list.html', menu=database.getMenu(), games=database.getGames())
 
 if __name__ == "__main__":
     app.run(debug=True)
