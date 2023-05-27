@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 {{ super() }}
+<style>
+    footer {
+        margin-top: 50%;
+    }
+</style>
 {% if games %}
     {% for g in games %}
         <h1>{{g.title}}</h1>
@@ -11,6 +16,6 @@
         {% endif %}
     {% endfor %}
 {% else %}
-    <h1>Упс. Пока что тут ничего нет(</h1>
+    <h1 style="text-align: center; margin-top: 10%;">Упс. Пока что тут ничего нет(</h1>
 {% endif %}
 {% endblock %}

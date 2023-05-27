@@ -76,7 +76,7 @@ def admin_page():
     database = DataBase(db)
     if 'userlogged' in session:
         if database.getStatus(session['userlogged']) == 'admin':
-            return render_template('admin.html', menu=database.getMenu())
+            return render_template('admin.html', menu=database.getMenu(), status=database.getStatus(session['userlogged']))
     return redirect(url_for('start_page'))
 
 #quit
@@ -92,7 +92,7 @@ def quit():
 def game_list():
     db = connect_db()
     database = DataBase(db)
-    return render_template('game_list.html', menu=database.getMenu(), games=database.getGames())
+    return render_template('game_list.html', menu=database.getMenu(), games=database.getGames(), status=database.getStatus(session['userlogged']))
 
 if __name__ == "__main__":
     app.run(debug=True)
