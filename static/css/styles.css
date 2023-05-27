@@ -130,6 +130,7 @@ input[type=text]:focus, input[type=password]:focus {
 }
 
 .modal-content {
+    border-radius: 15px;
     background-color: #fefefe;
     margin: 10% auto 15% auto;
     border: 1px solid #888;

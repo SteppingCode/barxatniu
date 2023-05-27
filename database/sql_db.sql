@@ -4,18 +4,6 @@ title text not null,
 url text not null
 );
 
-create table if not exists teachermenu (
-id integer primary key autoincrement,
-title text not null,
-url text not null
-);
-
-create table if not exists studentmenu (
-id integer primary key autoincrement,
-title text not null,
-url text not null
-);
-
 create table if not exists game (
 id integer primary key autoincrement,
 title text not null,

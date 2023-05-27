@@ -68,66 +68,6 @@ class DataBase:
             print(str(e))
             return False
 
-    def addTeacherMenu(self, title, url):
-        try:
-            self.__cur.execute("INSERT INTO teachermenu VALUES (NULL, ?, ?)", (title,url))
-            self.__db.commit()
-        except sq.Error as e:
-            print(str(e))
-            return False
-        return True
-
-    def delTeacherMenu(self, id=0):
-        try:
-            if id == 0:
-                self.__cur.execute("DELETE FROM teachermenu")
-            else:
-                self.__cur.execute(f"DELETE FROM teachermenu WHERE id == {id}")
-            self.__db.commit()
-        except sq.Error as e:
-            print(str(e))
-            return False
-        return True
-
-    def getTeacherMenu(self):
-        try:
-            self.__cur.execute("SELECT * FROM teachermenu")
-            res = self.__cur.fetchall()
-            if res: return res
-        except sq.Error as e:
-            print(str(e))
-            return False
-
-    def addStudentMenu(self, title, url):
-        try:
-            self.__cur.execute("INSERT INTO studentmenu VALUES (NULL, ?, ?)", (title,url))
-            self.__db.commit()
-        except sq.Error as e:
-            print(str(e))
-            return False
-        return True
-
-    def delStudentMenu(self, id=0):
-        try:
-            if id == 0:
-                self.__cur.execute("DELETE FROM studentmenu")
-            else:
-                self.__cur.execute(f"DELETE FROM studentmenu WHERE id == {id}")
-            self.__db.commit()
-        except sq.Error as e:
-            print(str(e))
-            return False
-        return True
-
-    def getStudentMenu(self):
-        try:
-            self.__cur.execute("SELECT * FROM studentmenu")
-            res = self.__cur.fetchall()
-            if res: return res
-        except sq.Error as e:
-            print(str(e))
-            return False
-
     def addUser(self, nick, password, age, name, status):
         try:
             self.__cur.execute("INSERT INTO users VALUES (NULL, ?, ?, ?, ?, ?)", (nick, password, age, name, status))
@@ -166,15 +106,6 @@ class DataBase:
         except sq.Error as e:
             print(str(e))
             return False
-
-    """def getUser(self):
-        try:
-            self.__cur.execute("SELECT * FROM users WHERE nick = ?", (nick,))
-            res = self.__cur.fetchone()
-            if res: return res
-        except sq.Error as e:
-            print(str(e))
-            return False"""
 
     def getStatus(self, nick):
         try:
@@ -223,9 +154,6 @@ class DataBase:
         except sq.Error as e:
             print(str(e))
             return False
-
-
-
 
 if __name__ == "__main__":
     db = connect_db()

@@ -42,6 +42,7 @@
         border-radius: 10px;
     }
     .regis-content {
+        border-radius: 15px;
         background-color: #fefefe;
         margin: 10% auto 15% 30%;
         border: 1px solid #888;
@@ -97,6 +98,7 @@
             <input type="text" placeholder="Полное имя" name="regname" required pattern="[А-яа-я ]*">
             <input type="password" placeholder="Пароль" name="regpsw" required pattern="[A-za-z1-0]*">
             <input type="password" placeholder="Повторите пароль" name="regpsw2" required pattern="[A-za-z1-0]*">
+            <input id="idbtn1" type="button" value="Я ученик" required name="student"><input id="idbtn2" type="button" value="Я учитель" required name="teacher">
         </div>
         <button id="btn" type="submit" class="signupbtn">Зарегистрироваться</button>
     </div>
@@ -110,6 +112,7 @@ idbtn1.onclick = function(event) {
         idbtn1.classList.remove('pressed');
     } else {
         idbtn1.classList.add('pressed');
+        idbtn2.classList.remove('pressed');
     }
   }
 }
@@ -119,6 +122,7 @@ if (event.target == idbtn2) {
         idbtn2.classList.remove('pressed');
     } else {
         idbtn2.classList.add('pressed');
+        idbtn1.classList.remove('pressed');
     }
   }
 }

@@ -79,6 +79,15 @@ def admin_page():
             return render_template('admin.html', menu=database.getMenu(), status=database.getStatus(session['userlogged']))
     return redirect(url_for('start_page'))
 
+#reports
+@app.route('/reports', methods=['POST', 'GET'])
+def reports_page():
+    db = connect_db()
+    database = DataBase(db)
+    if 'userlogged' in session:
+        return render_template('reports.html', menu=database.getMenu(), status=database.getStatus(session['userlogged']))
+    return render_template('reports.html', menu=database.getMenu())
+
 #quit
 @app.route('/quit')
 def quit():

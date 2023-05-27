@@ -21,9 +21,15 @@
             {% endfor -%}
             {% if 'userlogged' in session %}
                 {% if status == 'admin' %}
-                    <li><a href="{{url_for('admin_page')}}" style="float: right;">Админ</a></li>
+                    <li><a href="{{url_for('admin_page')}}">Админ</a></li>
                 {% endif %}
-                <li><a href="{{url_for('quit')}}" style="float: right;">Выход</a></li>
+                {% if status == 'teacher' %}
+
+                {% endif %}
+                {% if status == 'student' %}
+
+                {% endif %}
+                <li><a href="{{url_for('quit')}}">Выход</a></li>
             {% else %}
                 <li><a onclick="document.getElementById('id01').style.display='block'" style="float: right;">Вход</a></li>
             {% endif %}
@@ -61,7 +67,7 @@ window.onclick = function(event) {
         <a href="https://github.com/dodik337/barxatniu">Source code</a>
         <a href="#contact">Contact</a>
         <a href="#discord">Discord</a>
-        <a href="#bug report">Bug report</a>
+        <a href="{{url_for('reports_page')}}">Bug report</a>
     </span>
 
 
