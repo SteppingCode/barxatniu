@@ -27,7 +27,7 @@ def get_db():
 @app.route('/update_server', methods=['POST', 'GET'])
 def webhook():
     if request.method == 'POST':
-        repo = git.Repo('/home//barxatniu')
+        repo = git.Repo('/home/oduvanchik/barxatniu')
         origin = repo.remotes.origin
         origin.pull()
         return 'Сайт обновился', 200

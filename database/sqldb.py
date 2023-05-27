@@ -1,11 +1,17 @@
 import sqlite3 as sq
 import os.path
 from flask import g, Flask
-from config import Config
+
+import os
+
+class Config():
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'privet _will day its okey'
 
 app = Flask(__name__)
 app.config.from_object(Config)
 app.config.update(dict(DATABASE=os.path.join(app.root_path,'../base.db')))
+
+
 
 def connect_db():
     conn = sq.connect(app.config['DATABASE'])
@@ -227,6 +233,3 @@ if __name__ == "__main__":
     #create_db()
     #print(db.addMenu('Список игр', 'game_list'))
     #print(db.delUser(0))
-    #print(db.addUser('bIades', '123', '14', 'Степин Евгений Андреевич', 'admin'))
-    #print(db.addUser('huilan91', '111', '15', 'Палеев Глеб Андреевич', 'admin'))
-    #print(db.addUser('teach', '1', '28', 'Вася Пупкин', 'teacher'))
