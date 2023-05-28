@@ -1,9 +1,44 @@
 {% extends 'base.html' %}
 {% block content %}
 {{ super() }}
+<style>
+    .question {
+        display: inline-block;
+        border: 1px black solid;
+        border-radius: 10px;
+        padding: 8px;
+        text-align: center;
+    }
+    .search {
+        display: inline-block;
+        border: 1px grey solid;
+        border-radius: 20px;
+        width: 50%;
+        height: 25px;
+        margin: 20px auto auto 25%;
+        padding: 10px;
+        font-size: 20px;
+    }
+</style>
+<input class="search" placeholder="Поиск">
+<h1 style="margin-left: 10%;">Актуальные баги</h1>
 {% if 'userlogged' in session %}
-
+    <div class="question"><a href="{{url_for('report_add')}}">Доложить о баге</a></div>
 {% else %}
-
+    <div class="question"><a href="{{url_for('register')}}">Зарегестрируйтесь</a> чтобы доложить о баге</div>
+{% endif %}
+{% if reports %}
+    {% for r in reports %}
+        <div>
+            <h2>{{r.title}}</h2>
+            {% if r.text[100] %}
+                <p>{{r.text[:100]}}...</p>
+            {% else %}
+                <p>{{r.text[:100]}}</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% else %}
+<div>Пока что тут ничего нет...</div>
 {% endif %}
 {% endblock %}
