@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 {{ super() }}
-<h1>Reports...</h1>
+{% if 'userlogged' in session %}
+
+{% else %}
+
+{% endif %}
 {% endblock %}

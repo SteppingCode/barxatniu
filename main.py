@@ -60,7 +60,7 @@ def register():
     if request.method == 'POST':
         if request.form['regpsw'] == request.form['regpsw2']:
             if database.addUser(request.form['regnick'], request.form['regpsw'], \
-                                    request.form['age'], request.form['regname'], ''):
+                                    request.form['age'], request.form['regname'], request.form['radio']):
                 session['userlogged'] = request.form['regnick']
                 return redirect(url_for('start_page'))
             else:
