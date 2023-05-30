@@ -23,11 +23,8 @@
                 {% if status == 'admin' %}
                     <li><a href="{{url_for('admin_page')}}">Админ</a></li>
                 {% endif %}
-                {% if status == 'teacher' %}
-
-                {% endif %}
                 {% if status == 'student' %}
-
+                    <li><a href="{{url_for('quit')}}">Войти в игру</a></li>
                 {% endif %}
                 <li><a href="{{url_for('quit')}}">Выход</a></li>
             {% else %}
