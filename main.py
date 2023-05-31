@@ -77,9 +77,9 @@ def game_choice(id_game):
     database = DataBase(db)
     if 'userlogged' in session:
         return render_template('game_choice.html', menu=database.getMenu(), title=database.getGame(id_game)['title'],\
-                            status=database.getStatus(session['userlogged']), game=database.getGame(id_game))
+                            status=database.getStatus(session['userlogged']), game=database.getGame(id_game), games=database.getGames())
     return render_template('game_choice.html', title=database.getGame(id_game)['title'], menu=database.getMenu(),\
-                            game=database.getGame(id_game))
+                            game=database.getGame(id_game), games=database.getGames())
 
 """#connect to game
 @app.route('/game/<game>/<int:gameid>', methods=['POST', 'GET'])
