@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+{{ super() }}
+<style>
+  footer {
+    margin-top: 50%;
+  }
+  #game_title {
+
+  }
+  #game_info {
+
+  }
+  #teacher_btn {
+
+  }
+  #teacher_btn a {
+    text-decoration: none;
+  }
+</style>
+{% if game %}
+  <div id="game_title">
+    <h1>{{game['title']}}</h1>
+  </div>
+  <div id="game_info">
+    <p>{{game['info']}}</p>
+  </div>
+  {% if status == 'teacher' %}
+      <div id="teacher_btn">
+        <a href="#">Начать игру</a>
+      </div>
+  {% endif %}
+{% endif %}
+{% endblock %}

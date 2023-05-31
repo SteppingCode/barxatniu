@@ -8,7 +8,7 @@
 </style>
 {% if games %}
     {% for g in games %}
-        <h1>{{g.title}}</h1>
+        <h1><a href="{{ url_for('game_choice', id_game=g.id) }}">{{g.title}}</a></h1>
         {% if g.info[100] %}
             <p>{{g.info[:100]}}...</p>
         {% else %}

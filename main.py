@@ -1,5 +1,6 @@
 #imports
 import os.path
+import random
 import sqlite3 as sq
 from flask import Flask, redirect, url_for, render_template, g, request, session, flash
 from config import Config
@@ -21,7 +22,6 @@ def get_db():
     if not hasattr(g, 'link_db'):
         g.link_db = connect_db()
         return g.link_db
-
 
 #Server updating
 @app.route('/update_server', methods=['POST', 'GET'])
@@ -47,7 +47,8 @@ def start_page():
         else:
             flash('Неверный логин или пароль', category='error')
     if 'userlogged' in session:
-        return render_template('index.html', title='Главная', menu=database.getMenu(), status=database.getStatus(session['userlogged']))
+        return render_template('index.html', title='Главная', menu=database.getMenu(),\
+                               status=database.getStatus(session['userlogged']))
     return render_template('index.html', title='Главная', menu=database.getMenu())
 
 #register
@@ -69,6 +70,27 @@ def register():
             flash('Пароли не совпадают', category='error')
     return render_template('register.html', title='Регистрация', menu=database.getMenu())
 
+#game choice
+@app.route('/game/<int:id_game>', methods=['POST' , 'GET'])
+def game_choice(id_game):
+    db = connect_db()
+    database = DataBase(db)
+    if 'userlogged' in session:
+        return render_template('game_choice.html', menu=database.getMenu(), title=database.getGame(id_game)['title'],\
+                            status=database.getStatus(session['userlogged']), game=database.getGame(id_game))
+    return render_template('game_choice.html', title=database.getGame(id_game)['title'], menu=database.getMenu(),\
+                            game=database.getGame(id_game))
+
+"""#connect to game
+@app.route('/game/<game>/<int:gameid>', methods=['POST', 'GET'])
+def game(game, gameid):
+    db = connect_db()
+    database = DataBase(db)
+    gameid = random.randint(0, 9999)
+    game = None
+    return render_template('game.html')
+"""
+
 #admin page
 @app.route('/admin', methods=['POST', 'GET'])
 def admin_page():
@@ -76,7 +98,8 @@ def admin_page():
     database = DataBase(db)
     if 'userlogged' in session:
         if database.getStatus(session['userlogged']) == 'admin':
-            return render_template('admin.html', menu=database.getMenu(), status=database.getStatus(session['userlogged']))
+            return render_template('admin.html', menu=database.getMenu(),\
+                                   status=database.getStatus(session['userlogged']))
     return redirect(url_for('start_page'))
 
 #reports
@@ -85,7 +108,8 @@ def reports_page():
     db = connect_db()
     database = DataBase(db)
     if 'userlogged' in session:
-        return render_template('reports.html', menu=database.getMenu(), status=database.getStatus(session['userlogged']))
+        return render_template('reports.html', menu=database.getMenu(),\
+                               status=database.getStatus(session['userlogged']))
     return render_template('reports.html', menu=database.getMenu())
 
 #quit
@@ -96,14 +120,24 @@ def quit():
     else:
         return redirect(url_for('start_page'))
 
+#contact
+@app.route('/contact', methods=['POST', 'GET'])
+def contact_page():
+    db = connect_db()
+    database = DataBase(db)
+    if 'userlogged' in session:
+        return render_template('contact.html', menu=database.getMenu(),\
+                               status=database.getStatus(session['userlogged']))
+    return render_template('contact.html', menu=database.getMenu())
+
 #game list
 @app.route('/game_list', methods=['POST', 'GET'])
 def game_list():
     db = connect_db()
     database = DataBase(db)
     if 'userlogged' in session:
-        return render_template('game_list.html', menu=database.getMenu(), games=database.getGames(),
-                               status=database.getStatus(session['userlogged']))
+        return render_template('game_list.html', menu=database.getMenu(),\
+                               games=database.getGames(), status=database.getStatus(session['userlogged']))
     return render_template('game_list.html', menu=database.getMenu(), games=database.getGames())
 
 if __name__ == "__main__":

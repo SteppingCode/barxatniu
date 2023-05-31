@@ -24,7 +24,7 @@
                     <li><a href="{{url_for('admin_page')}}">Админ</a></li>
                 {% endif %}
                 {% if status == 'student' %}
-                    <li><a href="{{url_for('quit')}}">Войти в игру</a></li>
+                    <li><a href="{{url_for('quit')}}">Подключиться к игре</a></li>
                 {% endif %}
                 <li><a href="{{url_for('quit')}}">Выход</a></li>
             {% else %}
@@ -63,7 +63,7 @@ window.onclick = function(event) {
     <span id="other">
         <a href="https://github.com/dodik337/barxatniu">Source code</a>
         <a href="#contact">Contact</a>
-        <a href="#discord">Discord</a>
+        <a href="https://discord.gg/nQxWBCUVUE">Discord</a>
         <a href="{{url_for('reports_page')}}">Bug report</a>
     </span>
 

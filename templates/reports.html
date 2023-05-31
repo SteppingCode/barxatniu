@@ -23,7 +23,7 @@
 <input class="search" placeholder="Поиск">
 <h1 style="margin-left: 10%;">Актуальные баги</h1>
 {% if 'userlogged' in session %}
-    <div class="question"><a href="{{url_for('report_add')}}">Доложить о баге</a></div>
+    <div class="question"><a href="#">Доложить о баге</a></div>
 {% else %}
     <div class="question"><a href="{{url_for('register')}}">Зарегестрируйтесь</a> чтобы доложить о баге</div>
 {% endif %}
