@@ -2,6 +2,16 @@ html, body {
     font-size: 22px;
     margin: 0;
     padding: 0;
+    height: 100%;
+}
+
+#wrapper {
+    min-height: 100%;
+    margin-bottom: 300px;
+}
+#wrapper:after {
+    content: "";
+    display: block;
 }
 
 h1 {
@@ -138,9 +148,6 @@ input[type=text]:focus, input[type=password]:focus {
     height: auto;
 }
 
-footer {
-    margin-top: 130%;
-}
 
 input:invalid {
     animation: shake 300ms;

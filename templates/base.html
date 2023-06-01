@@ -13,6 +13,7 @@
 </head>
 <body>
 {% block content %}
+<div class="wrapper">
     {%- block menu -%}
         <ul class="menu">
             <a href="{{url_for('start_page')}}"><img src="/static/img/favicon.png" width="40" height="40" style="margin-top: 6px; float: left; margin-left: 18px;"></a>
@@ -31,23 +32,23 @@
                 <li><a onclick="document.getElementById('id01').style.display='block'" style="float: right;">Вход</a></li>
             {% endif %}
         </ul>
-    {% endblock menu -%}
-    <div id="id01" class="modal">
-        <form class="modal-content" method="post" action="{{url_for('start_page')}}">
-            <div class="container">
-                <h1 style="text-align: center; text-transform: uppercase; font-family: Arial; font-size: 35px;">Вход</h1>
-                {% for cat, msg in get_flashed_messages(True) %}
-                    <div class="flash {{cat}}"> {{msg}}</div>
-                {% endfor %}
-                <div style="display: flex; flex-direction: column; padding-top: 20px;">
-                    <input type="text" placeholder="Логин" name="nick" required pattern="[A-za-z1-0]*">
-                    <input type="password" placeholder="Пароль" name="psw" required pattern="[A-za-z1-0]*">
+        {% endblock menu -%}
+        <div id="id01" class="modal">
+            <form class="modal-content" method="post" action="{{url_for('start_page')}}">
+                <div class="container">
+                    <h1 style="text-align: center; text-transform: uppercase; font-family: Arial; font-size: 35px;">Вход</h1>
+                    {% for cat, msg in get_flashed_messages(True) %}
+                        <div class="flash {{cat}}"> {{msg}}</div>
+                    {% endfor %}
+                    <div style="display: flex; flex-direction: column; padding-top: 20px;">
+                        <input type="text" placeholder="Логин" name="nick" required pattern="[A-za-z1-0]*">
+                        <input type="password" placeholder="Пароль" name="psw" required pattern="[A-za-z1-0]*">
+                    </div>
+                    <button id="btn" type="submit" class="signupbtn">Вход</button>
+                    <p>Еще нету аккаунта? <a onclick="modal.style.display = 'none';" href="{{url_for('register')}}">Создать аккаунт</a></p>
                 </div>
-                <button id="btn" type="submit" class="signupbtn">Вход</button>
-                <p>Еще нету аккаунта? <a onclick="modal.style.display = 'none';" href="{{url_for('register')}}">Создать аккаунт</a></p>
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
 </div>
 <script>
 var modal = document.getElementById('id01');
@@ -66,8 +67,6 @@ window.onclick = function(event) {
         <a href="https://discord.gg/nQxWBCUVUE">Discord</a>
         <a href="{{url_for('reports_page')}}">Bug report</a>
     </span>
-
-
 </footer>
 {% endblock %}
 </body>

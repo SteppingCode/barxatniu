@@ -2,9 +2,6 @@
 {% block content %}
 {{ super() }}
 <style>
-  footer {
-    margin-top: 50%;
-  }
   .content-block {
     display: flex;
   }
@@ -45,7 +42,16 @@
       <h1 id="game_title">{{game['title']}}</h1>
       <p id="game_info">{{game['info']}}</p>
       {% if status == 'teacher' %}
-        <a id="teacher_btn" href="#">Начать игру</a>
+        <button onclick="document.getElementById('id02').style.display='block'">Создать игру</button>
+        <div id="id02", class="">
+            <form class="" method="post" action="{{url_for('game', gc=game.id, gameid=gameid)}}">
+              <div class="">
+                <label><input placeholder="Вопрос"></label>
+                <label><input placeholder="Вариант ответа"></label>
+                <button id="addans" type="button">Добавить вариант ответа</button>
+              </div>
+            </form>
+        </div>
       {% endif %}
     </div>
     <div class="border-list">
@@ -60,5 +66,14 @@
         {% endfor %}
     </div>
 </div>
+<script>
+  const btn_add = document.getElementById('addans');
+  function addAnswer(event) {
+    const list = document.getElementsByTagName('ul');
+    if (event.target == btn_add) {
+      list.createElement('li', 'input')
+    }
+  }
+</script>
 {% endif %}
 {% endblock %}
