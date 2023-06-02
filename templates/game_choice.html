@@ -8,6 +8,9 @@
   .game {
     justify-content: column;
   }
+  #id02 {
+    display: none;
+  }
   #game_title {
     margin: 50px;
   }
@@ -35,6 +38,18 @@
     top: 8%;
     padding-left: 8px;
   }
+  .cont input {
+    display: flex;
+    align-items: column;
+  }
+  #btn_start, #btn_end {
+    margin-left: 70%;
+    transform: translate(-50%, 50%);
+    border: 1px black solid;
+    border-radius: 20px;
+    padding: 16px;
+    font-size: 24px;
+  }
 </style>
 {% if game %}
 <div class="content-block">
@@ -42,14 +57,15 @@
       <h1 id="game_title">{{game['title']}}</h1>
       <p id="game_info">{{game['info']}}</p>
       {% if status == 'teacher' %}
-        <button onclick="document.getElementById('id02').style.display='block'">Создать игру</button>
-        <div id="id02", class="">
-            <form class="" method="post" action="{{url_for('game', gc=game.id, gameid=gameid)}}">
-              <div class="">
-                <label><input placeholder="Вопрос"></label>
-                <label><input placeholder="Вариант ответа"></label>
-                <button id="addans" type="button">Добавить вариант ответа</button>
+        <input type="button" value="Создать игру" id="btn_start" onclick="document.getElementById('id02').style.display='block'; document.getElementById('btn_end').style.display='block'; document.getElementById('btn_start').style.display='none';">
+        <input type="button" style="display: none;" value="Назад" id="btn_end" onclick="document.getElementById('id02').style.display='none'; document.getElementById('btn_start').style.display='block'; document.getElementById('btn_end').style.display='none';">
+        <div id="id02" class="quiz">
+            <form class="quiz-content" method="post" action="{{url_for('game', gc=game.id, gameid=gameid)}}">
+              <div class="cont">
+                <label><input placeholder="Добавить вопрос" required><button id="addquest" type="button">&plus;</button></label>
+                <label><input placeholder="Вариант ответа" required><button id="addans" type="button">&plus;</button></label>
               </div>
+                <button type="submit">Подтвердить</button>
             </form>
         </div>
       {% endif %}
@@ -67,13 +83,6 @@
     </div>
 </div>
 <script>
-  const btn_add = document.getElementById('addans');
-  function addAnswer(event) {
-    const list = document.getElementsByTagName('ul');
-    if (event.target == btn_add) {
-      list.createElement('li', 'input')
-    }
-  }
 </script>
 {% endif %}
 {% endblock %}
