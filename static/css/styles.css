@@ -181,7 +181,8 @@ footer {
     box-sizing: border-box;
     width: 100%;
     padding: 50px;
-    background-color: lightgrey;
+    color: lightgrey;
+    background-color: #3F412E;
     font-family: 'Disket Mono', sans-serif;
 }
 
@@ -190,6 +191,7 @@ footer #author {
 }
 
 footer a {
+    color: #fdc073;
     text-decoration: none;
 }
 

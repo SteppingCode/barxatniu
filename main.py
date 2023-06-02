@@ -59,12 +59,15 @@ def register():
         return redirect(url_for('start_page'))
     if request.method == 'POST':
         if request.form['regpsw'] == request.form['regpsw2']:
-            if database.addUser(request.form['regnick'], request.form['regpsw'], \
-                                    request.form['age'], request.form['regname'], request.form['radio']):
-                session['userlogged'] = request.form['regnick']
-                return redirect(url_for('start_page'))
+            if int(request.form['age']) <= 20 and request.form['radio'] == 'teacher':
+                flash('Укажите корректный возраст', category='error')
             else:
-                flash('Некорректные данные', category='error')
+                if database.addUser(request.form['regnick'], request.form['regpsw'], \
+                                        request.form['age'], request.form['regname'], request.form['radio']):
+                    session['userlogged'] = request.form['regnick']
+                    return redirect(url_for('start_page'))
+                else:
+                    flash('Некорректные данные', category='error')
         else:
             flash('Пароли не совпадают', category='error')
     return render_template('register.html', title='Регистрация', menu=database.getMenu())
@@ -142,10 +145,10 @@ def game_list():
     db = connect_db()
     database = DataBase(db)
     if 'userlogged' in session:
-        return render_template('game_list.html', menu=database.getMenu(),\
+        return render_template('game_list.html', title='Список игр', menu=database.getMenu(),\
                                 games=database.getGames(),
                                 status=database.getStatus(session['userlogged']))
-    return render_template('game_list.html', menu=database.getMenu(), games=database.getGames())
+    return render_template('game_list.html', title='Список игр', menu=database.getMenu(), games=database.getGames())
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -19,3 +19,12 @@ age integer not null,
 name text null unique,
 status text not null
 );
+
+create table if not exists reports (
+id integer primary key autoincrement,
+user text not null unique,
+about text not null,
+time integer not null,
+name text null unique,
+status text not null
+);
