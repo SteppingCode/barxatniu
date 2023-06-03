@@ -120,22 +120,32 @@ def reports_page():
         if request.method == 'POST':
             if database.addReport(session['userlogged'],
                                   request.form['about'],
-                                  request.form['name'],
-                                  database.getStatus(session['userlogged'])):
+                                  request.form['name']):
                 flash('Спасибо за вклад в будущее сайта!', category='success')
                 return redirect(url_for('reports_page'))
         return render_template('reports.html', title='Репорты', menu=database.getMenu(),
                                 status=database.getStatus(session['userlogged']),
-                                reports=database.getReports())
-    return render_template('reports.html', title='Репорты', menu=database.getMenu(), reports=database.getReports())
+                                reports_unsolved=database.getUnSolvedReports(),
+                                reports_solved=database.getSolvedReports(), reports=database.getReports(),
+                                lastreps=database.getLastReports())
+    return render_template('reports.html', title='Репорты', menu=database.getMenu(), reports=database.getReports(),
+                            lastreps=database.getLastReports(),
+                            reports_unsolved=database.getUnSolvedReports(),
+                            reports_solved=database.getSolvedReports())
 
 @app.route('/reports/<int:id_rep>', methods=['POST', 'GET'])
 def showReport(id_rep):
     db = connect_db()
     database = DataBase(db)
+    title = database.getReport(id_rep)['name']
     if 'userlogged' in session:
-        return render_template('')
-    return render_template('')
+        return render_template('report_page.html', title=title, menu=database.getMenu(),
+                                status=database.getStatus(session['userlogged']), report=database.getReport(id_rep),
+                                reports=database.getReports(),
+                                lastreps=database.getLastReports())
+    return render_template('report_page.html', title=title, menu=database.getMenu(), report=database.getReport(id_rep),
+                            reports=database.getReports(),
+                            lastreps=database.getLastReports())
 
 #quit
 @app.route('/quit')

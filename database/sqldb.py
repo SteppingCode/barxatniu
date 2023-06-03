@@ -153,7 +153,7 @@ class DataBase:
             res = self.__cur.fetchone()
             if res: return res
         except sq.Error as e:
-            print("Ошибка получения статьи из БД" + str(e))
+            print(str(e))
         return (False, False)
 
     def getGames(self):
@@ -165,10 +165,10 @@ class DataBase:
             print(str(e))
             return False
 
-    def addReport(self, user, about, name, status):
+    def addReport(self, user, about, name):
         try:
             tm = date.today()
-            self.__cur.execute("INSERT INTO reports VALUES (NULL, ?, ?, ?, ?, ?)", (user, about, tm, name, status))
+            self.__cur.execute("INSERT INTO reports VALUES (NULL, ?, ?, ?, ?, ?)", (user, about, tm, name, 'unsolved'))
             self.__db.commit()
         except sq.Error as e:
             print(str(e))
@@ -193,7 +193,16 @@ class DataBase:
             res = self.__cur.fetchall()
             if res: return res
         except sq.Error as e:
-            print("Ошибка получения статьи из БД" + str(e))
+            print(str(e))
+        return []
+
+    def getLastReports(self):
+        try:
+            self.__cur.execute(f"SELECT * FROM reports ORDER BY time DESC LIMIT 5")
+            res = self.__cur.fetchall()
+            if res: return res
+        except sq.Error as e:
+            print(str(e))
         return []
 
     def getReport(self, repid):
@@ -202,8 +211,26 @@ class DataBase:
             res = self.__cur.fetchone()
             if res: return res
         except sq.Error as e:
-            print("Ошибка получения статьи из БД" + str(e))
+            print(str(e))
         return (False, False)
+
+    def getSolvedReports(self):
+        try:
+            self.__cur.execute(f"SELECT * FROM reports WHERE status == 'solved'")
+            res = self.__cur.fetchall()
+            if res: return res
+        except sq.Error as e:
+            print(str(e))
+        return []
+
+    def getUnSolvedReports(self):
+        try:
+            self.__cur.execute(f"SELECT * FROM reports WHERE status == 'unsolved'")
+            res = self.__cur.fetchall()
+            if res: return res
+        except sq.Error as e:
+            print(str(e))
+        return []
 
 if __name__ == "__main__":
     db = connect_db()

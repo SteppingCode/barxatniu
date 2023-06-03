@@ -64,6 +64,30 @@
         min-width: 600px;
         border: 1px black solid;
     }
+    #btn_unsolved, #btn_solved {
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+        border-radius: 10px;
+        font-size: 20px;
+        background-color: grey;
+    }
+    #btn_unsolved:hover {
+        background-color: red;
+        color: white;
+    }
+    #btn_solved:hover {
+        background-color: green;
+        color: white;
+    }
+    .time {
+        margin-left: 22px;
+        font-size: 24px;
+    }
 </style>
 <input type="search" placeholder="Поиск">
 <h1 style="margin-left: 10%;">Актуальные баги</h1>
@@ -81,7 +105,7 @@
 <div class="border-list">
     <h1 style="font-family: Arial, monospace; font-size: 40px;">Последние репорты:</h1>
     {% if reports %}
-        {% for i in reports %}
+        {% for i in lastreps %}
             <h2><a href="{{url_for('showReport', id_rep=i.id)}}" style="text-decoration: none;">{{i.name}}</a></h2>
             {% if i.about[20] %}
                 <p>{{i.about[:20]}}...</p>
@@ -94,19 +118,61 @@
     {% endif %}
 </div>
 <div class="reports">
+    <div style="display: flex; justify-content: space-around; font-family: Arial, monospace;">
+        <div class="buttons">
+            <button id="btn_unsolved" type="button">Нерешенные</button>
+        </div>
+        <div class="buttons">
+            <button id="btn_solved" type="button">Решенные</button>
+        </div>
+    </div>
     {% if reports %}
-        {% for r in reports %}
-            <div>
-                <h2><a href="{{url_for('showReport', id_rep=r.id)}}" style="text-decoration: none;">{{r.name}}</a></h2>
-                {% if r.about[100] %}
-                    <p>{{r.about[:100]}}...</p>
-                {% else %}
-                    <p>{{r.about[:100]}}</p>
-                {% endif %}
-            </div>
-        {% endfor %}
+        <div id="unsolved-content">
+            {% for r in reports_unsolved %}
+                <div>
+                    <h2><a href="{{url_for('showReport', id_rep=r.id)}}" style="text-decoration: none;">{{r.name}}</a>
+                        <span class="time">{{r.time}}</span></h2>
+                    {% if r.about[100] %}
+                        <p>{{r.about[:100]}}...</p>
+                    {% else %}
+                        <p>{{r.about[:100]}}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        <div id="solved-content">
+            {% for r in reports_solved %}
+                <div>
+                    <h2><a href="{{url_for('showReport', id_rep=r.id)}}" style="text-decoration: none;">{{r.name}}</a>
+                        <span class="time">{{r.time}}</span></h2>
+                    {% if r.about[100] %}
+                        <p>{{r.about[:100]}}...</p>
+                    {% else %}
+                        <p>{{r.about[:100]}}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
     {% else %}
         <div>Пока что тут ничего нет...</div>
     {% endif %}
 </div>
+<script>
+    var solved = document.getElementById('btn_solved');
+    var unsolved = document.getElementById('btn_unsolved');
+    window.onclick = function(event) {
+        if (event.target == solved) {
+            solved.style.background='green';
+            unsolved.style.background='';
+            document.getElementById('solved-content').style.display='block';
+            document.getElementById('unsolved-content').style.display='none';
+        }
+        if (event.target == unsolved) {
+            solved.style.background='';
+            unsolved.style.background='red';
+            document.getElementById('unsolved-content').style.display='block';
+            document.getElementById('solved-content').style.display='none';
+        }
+    }
+</script>
 {% endblock %}

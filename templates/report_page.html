@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+{{ super() }}
+<style>
+    .border-list {
+        width: 22%;
+        position: absolute;
+        border-left: 2px black solid;
+        border-bottom: 2px black solid;
+        left: 76%;
+        top: 18%;
+        padding-left: 8px;
+    }
+    .report-info {
+
+    }
+</style>
+<div class="report-info">
+    <h1>{{report.name}}</h1><span>{{report.time}}</span>
+    <p>{{report.about}}</p>
+    {% if session['userlogged'] == report.user or status == 'admin' %}
+        <button id="btn_solve">Решено</button>
+    {% endif %}
+</div>
+
+<div class="border-list">
+    <h1 style="font-family: Arial, monospace; font-size: 40px;">Последние репорты:</h1>
+    {% if reports %}
+        {% for i in lastreps %}
+            <h2><a href="{{url_for('showReport', id_rep=i.id)}}" style="text-decoration: none;">{{i.name}}</a></h2>
+            {% if i.about[20] %}
+                <p>{{i.about[:20]}}...</p>
+            {% else %}
+                <p>{{i.about[:20]}}</p>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <p>Тут ничего нет)</p>
+    {% endif %}
+</div>
+{% endblock %}
