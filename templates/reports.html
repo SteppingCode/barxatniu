@@ -2,7 +2,7 @@
 {% block content %}
 {{ super() }}
 <style>
-    .question {
+    .question-unreg {
         display: inline-block;
         border: 1px black solid;
         border-radius: 12px;
@@ -11,25 +11,37 @@
         margin-left: 10%;
         width: 60%;
     }
-    .search {
+    .question {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        border: 1px black solid;
+        border-radius: 12px;
+        padding: 10px;
+        margin-left: 10%;
+        width: 60%;
+    }
+    input[type=search] {
         display: inline-block;
         border: 1px grey solid;
         border-radius: 20px;
         width: 50%;
         height: 25px;
         margin: 20px auto auto 20%;
-        padding: 10px;
+        padding: 20px;
         font-size: 20px;
     }
     .reports {
         margin-top: 20px;
         padding: 8px;
+        border-radius: 12px;
         border-left: 1px black solid;
         border-right: 1px black solid;
         border-top: 1px black solid;
-        margin-left: 50%;
+        margin-left: 49.5%;
         transform: translate(-65%);
         width: 60%;
+        overflow: hidden;
     }
     .border-list {
         width: 22%;
@@ -40,34 +52,61 @@
         top: 18%;
         padding-left: 8px;
     }
+    #text {
+        width: auto;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border: none;
+        background-color: #ddd;
+        outline: none;
+        width: 600px;
+        max-width: 600px;
+        min-width: 600px;
+        border: 1px black solid;
+    }
 </style>
-<input class="search" placeholder="Поиск">
+<input type="search" placeholder="Поиск">
 <h1 style="margin-left: 10%;">Актуальные баги</h1>
 {% if 'userlogged' in session %}
+<form method="post">
     <div class="question">
-        <label><input placeholder="Заголовок" required></label>
-        <label><textarea placeholder="Текст" required></textarea></label>
+        <label><input style="width: 600px; border: 1px black solid; background-color: #ddd;" type="text" placeholder="Заголовок" name="name" required></label>
+        <label><textarea id="text" placeholder="Текст" name="about" required></textarea></label>
+        <button style="width: 630px;" type="submit" id="btn">Отправить</button>
     </div>
+</form>
 {% else %}
-    <div class="question"><a style="color: purple;" href="{{url_for('register')}}">Зарегестрируйтесь</a> или <a style="text-decoration: underline; color: purple;" onclick="document.getElementById('id01').style.display='block'">Войдите</a> чтобы доложить о баге</div>
+    <div class="question-unreg"><a style="color: purple;" href="{{url_for('register')}}">Зарегестрируйтесь</a> или <a style="text-decoration: underline; color: purple;" onclick="document.getElementById('id01').style.display='block'">Войдите</a> чтобы доложить о баге</div>
 {% endif %}
 <div class="border-list">
-    <h1>Последние репорты</h1>
+    <h1 style="font-family: Arial, monospace; font-size: 40px;">Последние репорты:</h1>
+    {% if reports %}
+        {% for i in reports %}
+            <h2><a href="{{url_for('showReport', id_rep=i.id)}}" style="text-decoration: none;">{{i.name}}</a></h2>
+            {% if i.about[20] %}
+                <p>{{i.about[:20]}}...</p>
+            {% else %}
+                <p>{{i.about[:20]}}</p>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <p>Тут ничего нет)</p>
+    {% endif %}
 </div>
 <div class="reports">
     {% if reports %}
         {% for r in reports %}
             <div>
-                <h2>{{r.title}}</h2>
-                {% if r.text[100] %}
-                    <p>{{r.text[:100]}}...</p>
+                <h2><a href="{{url_for('showReport', id_rep=r.id)}}" style="text-decoration: none;">{{r.name}}</a></h2>
+                {% if r.about[100] %}
+                    <p>{{r.about[:100]}}...</p>
                 {% else %}
-                    <p>{{r.text[:100]}}</p>
+                    <p>{{r.about[:100]}}</p>
                 {% endif %}
             </div>
         {% endfor %}
     {% else %}
-    <div>Пока что тут ничего нет...</div>
+        <div>Пока что тут ничего нет...</div>
     {% endif %}
 </div>
 {% endblock %}

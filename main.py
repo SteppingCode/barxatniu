@@ -117,9 +117,25 @@ def reports_page():
     db = connect_db()
     database = DataBase(db)
     if 'userlogged' in session:
-        return render_template('reports.html', menu=database.getMenu(),\
-                                status=database.getStatus(session['userlogged']))
-    return render_template('reports.html', menu=database.getMenu())
+        if request.method == 'POST':
+            if database.addReport(session['userlogged'],
+                                  request.form['about'],
+                                  request.form['name'],
+                                  database.getStatus(session['userlogged'])):
+                flash('Спасибо за вклад в будущее сайта!', category='success')
+                return redirect(url_for('reports_page'))
+        return render_template('reports.html', title='Репорты', menu=database.getMenu(),
+                                status=database.getStatus(session['userlogged']),
+                                reports=database.getReports())
+    return render_template('reports.html', title='Репорты', menu=database.getMenu(), reports=database.getReports())
+
+@app.route('/reports/<int:id_rep>', methods=['POST', 'GET'])
+def showReport(id_rep):
+    db = connect_db()
+    database = DataBase(db)
+    if 'userlogged' in session:
+        return render_template('')
+    return render_template('')
 
 #quit
 @app.route('/quit')

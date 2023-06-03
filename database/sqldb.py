@@ -1,3 +1,4 @@
+from datetime import date
 import sqlite3 as sq
 import os.path
 from flask import g, Flask
@@ -163,6 +164,46 @@ class DataBase:
         except sq.Error as e:
             print(str(e))
             return False
+
+    def addReport(self, user, about, name, status):
+        try:
+            tm = date.today()
+            self.__cur.execute("INSERT INTO reports VALUES (NULL, ?, ?, ?, ?, ?)", (user, about, tm, name, status))
+            self.__db.commit()
+        except sq.Error as e:
+            print(str(e))
+            return False
+        return True
+
+    def delReports(self, id=0):
+        try:
+            if id == 0:
+                self.__cur.execute("DELETE FROM reports")
+            else:
+                self.__cur.execute(f"DELETE FROM reports WHERE id == {id}")
+            self.__db.commit()
+        except sq.Error as e:
+            print(str(e))
+            return False
+        return True
+
+    def getReports(self):
+        try:
+            self.__cur.execute(f"SELECT * FROM reports ORDER BY time DESC")
+            res = self.__cur.fetchall()
+            if res: return res
+        except sq.Error as e:
+            print("Ошибка получения статьи из БД" + str(e))
+        return []
+
+    def getReport(self, repid):
+        try:
+            self.__cur.execute(f"SELECT * FROM reports WHERE id = {repid} LIMIT 1")
+            res = self.__cur.fetchone()
+            if res: return res
+        except sq.Error as e:
+            print("Ошибка получения статьи из БД" + str(e))
+        return (False, False)
 
 if __name__ == "__main__":
     db = connect_db()
