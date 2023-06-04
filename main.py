@@ -6,6 +6,7 @@ from flask import Flask, redirect, url_for, render_template, g, request, session
 from config import Config
 from database.sqldb import DataBase
 import git
+import json
 
 #variables
 app = Flask(__name__)
@@ -108,7 +109,19 @@ def admin_page():
     if 'userlogged' in session:
         if database.getStatus(session['userlogged']) == 'admin':
             return render_template('admin.html', menu=database.getMenu(),\
-                                    status=database.getStatus(session['userlogged']))
+                                    status=database.getStatus(session['userlogged']),
+                                    users=database.getUsers())
+    return redirect(url_for('start_page'))
+
+#status changing
+@app.route('/admin/status_change/<int:id_user>', methods=['POST', 'GET'])
+def status_change(id_user):
+    db = connect_db()
+    database = DataBase(db)
+    if 'userlogged' in session:
+        if database.getStatus(session['userlogged']) == 'admin':
+            if database.UpdateStatus(id_user, request.form['status']):
+                return redirect(url_for('admin_page'))
     return redirect(url_for('start_page'))
 
 #reports
@@ -134,7 +147,7 @@ def reports_page():
                             reports_solved=database.getSolvedReports())
 
 #report page
-@app.route('/reports/<int:id_rep>', methods=['POST', 'GET'])
+@app.route('/report/<int:id_rep>', methods=['POST', 'GET'])
 def showReport(id_rep):
     db = connect_db()
     database = DataBase(db)

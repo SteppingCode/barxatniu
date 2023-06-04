@@ -99,9 +99,9 @@ class DataBase:
             print(str(e))
             return False
 
-    def getUsers(self, status):
+    def getUsers(self):
         try:
-            self.__cur.execute(f"SELECT * FROM users WHERE status = ?", (status,))
+            self.__cur.execute(f"SELECT * FROM users LIMIT 20")
             res = self.__cur.fetchall()
             if res: return res
         except sq.Error as e:
@@ -117,9 +117,9 @@ class DataBase:
             print(str(e))
             return False
 
-    def UpdateStatus(self, nick, status):
+    def UpdateStatus(self, id, status):
         try:
-            self.__cur.execute(f"UPDATE users SET status = {status} WHERE nick = {nick}")
+            self.__cur.execute(f"UPDATE users SET status == ? WHERE id == ?", (status, id))
             self.__db.commit()
         except sq.Error as e:
             print(str(e))
@@ -216,7 +216,7 @@ class DataBase:
 
     def getSolvedReports(self):
         try:
-            self.__cur.execute(f"SELECT * FROM reports WHERE status == 'solved'")
+            self.__cur.execute(f"SELECT * FROM reports WHERE status == 'solved' ORDER BY time DESC LIMIT 10")
             res = self.__cur.fetchall()
             if res: return res
         except sq.Error as e:
@@ -225,7 +225,7 @@ class DataBase:
 
     def getUnSolvedReports(self):
         try:
-            self.__cur.execute(f"SELECT * FROM reports WHERE status == 'unsolved'")
+            self.__cur.execute(f"SELECT * FROM reports WHERE status == 'unsolved' ORDER BY time DESC LIMIT 10")
             res = self.__cur.fetchall()
             if res: return res
         except sq.Error as e:
