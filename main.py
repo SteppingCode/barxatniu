@@ -120,7 +120,12 @@ def status_change(id_user):
     database = DataBase(db)
     if 'userlogged' in session:
         if database.getStatus(session['userlogged']) == 'admin':
-            if database.UpdateStatus(id_user, request.form['status']):
+            if request.form['status'] == 'teacher' or request.form['status'] == 'student' or \
+                request.form['status'] == 'admin':
+                if database.UpdateStatus(id_user, request.form['status']):
+                    return redirect(url_for('admin_page'))
+            else:
+                flash('Некорректный статус', category='error')
                 return redirect(url_for('admin_page'))
     return redirect(url_for('start_page'))
 
