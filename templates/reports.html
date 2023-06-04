@@ -106,7 +106,11 @@
     <h1 style="font-family: Arial, monospace; font-size: 40px;">Последние репорты:</h1>
     {% if reports %}
         {% for i in lastreps %}
-            <h2><a href="{{url_for('showReport', id_rep=i.id)}}" style="text-decoration: none;">{{i.name}}</a></h2>
+            {% if i.status == 'solved' %}
+                <h1><a href="{{url_for('showReport', id_rep=i.id)}}" style="text-decoration: none;">{{i.name}}</a> <span style="color: green;">✔</span></h1>
+            {% else %}
+                <h1><a href="{{url_for('showReport', id_rep=i.id)}}" style="text-decoration: none;">{{i.name}}</a></h1>
+            {% endif %}
             {% if i.about[20] %}
                 <p>{{i.about[:20]}}...</p>
             {% else %}
@@ -132,6 +136,9 @@
                 <div>
                     <h2><a href="{{url_for('showReport', id_rep=r.id)}}" style="text-decoration: none;">{{r.name}}</a>
                         <span class="time">{{r.time}}</span></h2>
+                    {% if status == 'admin' %}
+                        <a href="{{url_for('delreport', id_rep=r.id)}}">Удалить</a>
+                    {% endif %}
                     {% if r.about[100] %}
                         <p>{{r.about[:100]}}...</p>
                     {% else %}
@@ -143,8 +150,11 @@
         <div id="solved-content">
             {% for r in reports_solved %}
                 <div>
-                    <h2><a href="{{url_for('showReport', id_rep=r.id)}}" style="text-decoration: none;">{{r.name}}</a>
+                    <h2><a href="{{url_for('showReport', id_rep=r.id)}}" style="text-decoration: none;">{{r.name}}</a> <span style="color: green;">✔</span>
                         <span class="time">{{r.time}}</span></h2>
+                    {% if status == 'admin' %}
+                        <a href="{{url_for('delreport', id_rep=r.id)}}">Удалить</a>
+                    {% endif %}
                     {% if r.about[100] %}
                         <p>{{r.about[:100]}}...</p>
                     {% else %}

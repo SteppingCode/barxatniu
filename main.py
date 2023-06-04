@@ -133,19 +133,54 @@ def reports_page():
                             reports_unsolved=database.getUnSolvedReports(),
                             reports_solved=database.getSolvedReports())
 
+#report page
 @app.route('/reports/<int:id_rep>', methods=['POST', 'GET'])
 def showReport(id_rep):
     db = connect_db()
     database = DataBase(db)
     title = database.getReport(id_rep)['name']
     if 'userlogged' in session:
+        if request.method == 'POST':
+            if database.addAnswers(session['userlogged'], request.form['text'], id_rep):
+                return render_template('report_page.html', title=title, menu=database.getMenu(),
+                                       status=database.getStatus(session['userlogged']),
+                                       report=database.getReport(id_rep),
+                                       reports=database.getReports(),
+                                       lastreps=database.getLastReports(),
+                                       answers=database.getAnswers(id_rep))
         return render_template('report_page.html', title=title, menu=database.getMenu(),
                                 status=database.getStatus(session['userlogged']), report=database.getReport(id_rep),
                                 reports=database.getReports(),
-                                lastreps=database.getLastReports())
+                                lastreps=database.getLastReports(),
+                                answers=database.getAnswers(id_rep))
     return render_template('report_page.html', title=title, menu=database.getMenu(), report=database.getReport(id_rep),
                             reports=database.getReports(),
-                            lastreps=database.getLastReports())
+                            lastreps=database.getLastReports(),
+                            answers=database.getAnswers(id_rep))
+
+#solving report
+@app.route('/reports/solve/<int:id_rep>', methods=['POST', 'GET'])
+def report_solve(id_rep):
+    db = connect_db()
+    database = DataBase(db)
+    if 'userlogged' in session:
+        if database.getReport(id_rep)['user'] == session['userlogged'] or \
+            database.getStatus(session['userlogged'] == 'admin'):
+            database.UpdateReportStatus(id_rep)
+            return redirect(url_for('reports_page'))
+    return redirect(url_for('reports_page'))
+
+#Deleting report
+@app.route('/delreport/<int:id_rep>')
+def delreport(id_rep):
+    db = get_db()
+    database = DataBase(db)
+    if 'userlogged' in session:
+        if database.getStatus(session['userlogged']) == 'admin':
+            if database.delReports(id_rep):
+                return redirect(url_for('reports_page'))
+    else:
+        return redirect(url_for('start_page'))
 
 #quit
 @app.route('/quit')

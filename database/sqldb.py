@@ -198,7 +198,7 @@ class DataBase:
 
     def getLastReports(self):
         try:
-            self.__cur.execute(f"SELECT * FROM reports ORDER BY time DESC LIMIT 5")
+            self.__cur.execute(f"SELECT * FROM reports ORDER BY id DESC LIMIT 5")
             res = self.__cur.fetchall()
             if res: return res
         except sq.Error as e:
@@ -231,6 +231,47 @@ class DataBase:
         except sq.Error as e:
             print(str(e))
         return []
+
+    def UpdateReportStatus(self, idrep):
+        try:
+            self.__cur.execute(f"UPDATE reports SET status == 'solved' WHERE id == {idrep}")
+            self.__db.commit()
+        except sq.Error as e:
+            print(str(e))
+            return False
+        return True
+
+    def addAnswers(self, user, text, idrep):
+        try:
+            tm = date.today()
+            self.__cur.execute("INSERT INTO answers VALUES (NULL, ?, ?, ?, ?)", (user, text, idrep, tm))
+            self.__db.commit()
+        except sq.Error as e:
+            print(str(e))
+            return False
+        return True
+
+    def delAnswers(self, id=0):
+        try:
+            if id == 0:
+                self.__cur.execute("DELETE FROM answers")
+            else:
+                self.__cur.execute(f"DELETE FROM answers WHERE id == {id}")
+            self.__db.commit()
+        except sq.Error as e:
+            print(str(e))
+            return False
+        return True
+
+    def getAnswers(self, id_rep):
+        try:
+            self.__cur.execute(f"SELECT * FROM answers WHERE idrep == {id_rep} ORDER BY time DESC")
+            res = self.__cur.fetchall()
+            if res: return res
+        except sq.Error as e:
+            print(str(e))
+        return []
+
 
 if __name__ == "__main__":
     db = connect_db()

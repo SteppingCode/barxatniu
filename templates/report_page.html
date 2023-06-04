@@ -12,22 +12,94 @@
         padding-left: 8px;
     }
     .report-info {
-
+        position: absolute;
+        margin-top: 40px;
+        margin-left: 22px;
+    }
+    #back_btn {
+        position: absolute;
+        border: none;
+        border-radius: 12px;
+        padding: 12px;
+        background-color: grey;
+        text-decoration: none;
+        margin: 12px;
+        color: white;
+    }
+    #back_btn:hover {
+        background-color: red;
+    }
+    #text {
+        max-width: 50%;
+        width: 50%;
+        min-width: 50%;
+        margin-top: 10%;
+    }
+    .answers {
+        position: relative;
+        width: auto;
+        max-width: 70%;
+        margin-top: 5%;
+        font-size: 30px;
+        padding: 25px;
+        list-style-type: disc;
+    }
+    #btn_solve {
+        text-decoration: none;
+        color: white;
+        background-color: grey;
+        border: none;
+        border-radius: 12px;
+        padding: 12px;
+    }
+    #btn_solve:hover {
+        text-decoration: underline;
+        color: white;
+        background-color: green;
     }
 </style>
+<a id="back_btn" href="{{url_for('reports_page')}}">Назад</a>
 <div class="report-info">
-    <h1>{{report.name}}</h1><span>{{report.time}}</span>
+    {% if report.status == 'solved' %}
+        <h1>{{report.name}} <span style="color: green;">✔</span></h1><span>{{report.time}}</span>
+    {% else %}
+        <h1>{{report.name}}</h1><span>{{report.time}}</span>
+    {% endif %}
     <p>{{report.about}}</p>
     {% if session['userlogged'] == report.user or status == 'admin' %}
-        <button id="btn_solve">Решено</button>
+        <a href="{{url_for('report_solve', id_rep=report.id)}}" id="btn_solve">Решено</a>
     {% endif %}
+    {% if 'userlogged' in session %}
+        <form method="post">
+            <label><textarea id="text" name="text"></textarea></label>
+            <button type="submit">Отправить</button>
+        </form>
+    {% endif %}
+    <div class="answers">
+        {% if answers %}
+            {% for ans in answers %}
+                {% if status == 'admin' %}
+                    <p style="font-family: Arial, monospace;"><strong>{{ans.user}}</strong> <a style="text-decoration: none;" href="">Удалить</a></p>
+                {% else %}
+                    <p style="font-family: Arial, monospace;"><strong>{{ans.user}}</strong></p>
+                {% endif %}
+                <p style="font-family: Arial, sans-serif;">{{ans.text}}</p>
+            {% endfor %}
+        {% else %}
+            <p>Тут ничего нет, но вы можете это исправить) </p>
+        {% endif %}
+    </div>
 </div>
 
 <div class="border-list">
     <h1 style="font-family: Arial, monospace; font-size: 40px;">Последние репорты:</h1>
     {% if reports %}
         {% for i in lastreps %}
-            <h2><a href="{{url_for('showReport', id_rep=i.id)}}" style="text-decoration: none;">{{i.name}}</a></h2>
+            {% if i.status == 'solved' %}
+                <h1><a href="{{url_for('showReport', id_rep=i.id)}}" style="text-decoration: none;">{{i.name}}</a> <span style="color: green;">✔</span></h1>
+            {% else %}
+                <h1><a href="{{url_for('showReport', id_rep=i.id)}}" style="text-decoration: none;">{{i.name}}</a></h1>
+            {% endif %}
             {% if i.about[20] %}
                 <p>{{i.about[:20]}}...</p>
             {% else %}
