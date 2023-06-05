@@ -36,8 +36,23 @@
     #change_status3 {
         background-color: red;
     }
+    .btns {
+        text-decoration: none;
+        color: white;
+        padding: 12px;
+        border-radius: 20px;
+        position: relative;
+        display: inline-block;
+        width: 90px;
+        margin-inline: 20%;
+        margin-top: 20px;
+    }
+    .btns:hover {
+        opacity: .6;
+    }
 </style>
 <video src="" typeof="mp4" autoplay loop muted style="position: absolute; opacity: .6; z-index: -1;" width="100%"></video>
+<a style="background-color: blue;" class="btns" href="{{url_for('contact_page')}}">Контакты</a> <a style="background-color: red;" class="btns" href="{{url_for('reports_page')}}">Репорты</a>
 <div class="content">
     <div class="teachers">
         <h1>Учителя</h1>

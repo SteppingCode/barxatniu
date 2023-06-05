@@ -36,3 +36,11 @@ text text not null,
 idrep integer not null,
 time integer not null
 );
+
+create table if not exists contact (
+id integer primary key autoincrement,
+user text not null,
+title text not null unique,
+text text not null,
+time integer not null
+);
