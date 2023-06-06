@@ -148,9 +148,9 @@ class DataBase:
             return False
         return True
 
-    def getGame(self, gameid):
+    def getGame(self, arg):
         try:
-            self.__cur.execute(f"SELECT * FROM game WHERE id = {gameid} LIMIT 1")
+            self.__cur.execute(f"SELECT * FROM game WHERE id = {arg} LIMIT 1")
             res = self.__cur.fetchone()
             if res: return res
         except sq.Error as e:
@@ -320,4 +320,6 @@ if __name__ == "__main__":
     #create_db()
     #print(db.addMenu('Список игр', 'game_list'))
     #print(db.delUser(0))
-    #print(db.addGame('Хз что7', 'я дура я дура я дура я дура я дура я дура я дура я дура я дура я дура я дура я дура я дура я дура', 'iamdura'))
+    #print(db.addGame('Quiz', 'Квиз. описание потом напишем', 'quiz'))
+    #print(db.addGame('Колесо удачи', 'Колесо удачи. описание потом напишем', 'spin'))
+    #print(db.addGame('Найди ошибку', 'Найди ошибку. описание потом напишем', 'find_a_mistake'))

@@ -60,7 +60,7 @@
         <input type="button" value="Создать игру" id="btn_start" onclick="document.getElementById('id02').style.display='block'; document.getElementById('btn_end').style.display='block'; document.getElementById('btn_start').style.display='none';">
         <input type="button" style="display: none;" value="Назад" id="btn_end" onclick="document.getElementById('id02').style.display='none'; document.getElementById('btn_start').style.display='block'; document.getElementById('btn_end').style.display='none';">
         <div id="id02" class="quiz">
-            <form class="quiz-content" method="post" action="{{url_for('game', gc=game.id, gameid=gameid)}}">
+            <form class="quiz-content" method="post" action="{{url_for('game', url=game['url'], id_game=id_game)}}">
               <div class="cont">
                 <label><input placeholder="Добавить вопрос" required><button id="addquest" type="button">&plus;</button></label>
                 <label><input placeholder="Вариант ответа" required><button id="addans" type="button">&plus;</button></label>

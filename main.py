@@ -83,23 +83,11 @@ def game_choice(id_game):
                                 title=database.getGame(id_game)['title'],
                                 status=database.getStatus(session['userlogged']),
                                 game=database.getGame(id_game), games=database.getGames(),
-                                gameid=random.randint(0, 9999))
+                                id_game=random.randint(0, 9999))
     return render_template('game_choice.html', title=database.getGame(id_game)['title'], 
                                 menu=database.getMenu(),
                                 game=database.getGame(id_game), games=database.getGames(),
-                                gameid=random.randint(0, 9999))
-
-#connect to game
-@app.route('/game/<gc>/<int:gameid>', methods=['POST', 'GET'])
-def game(gc, gameid):
-    db = connect_db()
-    database = DataBase(db)
-    if 'userlogged' in session:
-        return render_template('game.html', menu=database.getMenu(),
-                                status=database.getStatus(session['userlogged']),
-                                gameid=random.randint(0, 9999))
-    return render_template('game.html', menu=database.getMenu(),
-                           gameid=random.randint(0, 9999))
+                                id_game=random.randint(0, 9999))
 
 #admin page
 @app.route('/admin', methods=['POST', 'GET'])
@@ -257,6 +245,19 @@ def game_list():
                                 games=database.getGames(),
                                 status=database.getStatus(session['userlogged']))
     return render_template('game_list.html', title='Список игр', menu=database.getMenu(), games=database.getGames())
+
+#game connect
+@app.route('/<url>/<int:id_game>', methods=['POST', 'GET'])
+def game(url, id_game):
+    db = connect_db()
+    database = DataBase(db)
+    id_game = random.randint(0, 99999)
+    if 'userlogged' in session:
+        return render_template('game.html', menu=database.getMenu(), status=database.getStatus(session['userlogged']),
+                                title='a')
+    else:
+        flash('Войдите в свой аккаунт', category='error')
+        return redirect(url_for('start_page'))
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -76,11 +76,13 @@
             {% else %}
                 <div class="users">
                     <h1 style="text-align: center;">Сообщение админам</h1>
+                    <hr width="50%">
                     <form method="post" class="form">
                         <input placeholder="Заголовок" name="title" required>
                         <input placeholder="Текст" name="text" required>
                         <button type="submit">Отправить</button>
                     </form>
+                    <hr width="50%">
                     <div class="text">
                         {% for c in contact %}
                             <p><a style="text-decoration: none;" href="{{url_for('contact', id_contact=c.id)}}">{{c.title}}</a> <span>{{c.time}}</span></p>
@@ -90,6 +92,7 @@
             {% endif %}
         {% else %}
             <h1 style="text-align: center;">Сообщения админам</h1>
+            <hr width="50%">
             <div class="contact-unreg"><a style="color: purple;" href="{{url_for('register')}}">Зарегестрируйтесь</a> или <a style="text-decoration: underline; color: purple;" onclick="document.getElementById('id01').style.display='block'">Войдите</a> чтобы доложить о баге</div>
             <div class="text">
                 {% for c in contact %}
@@ -98,10 +101,43 @@
             </div>
         {% endif %}
     {% else %}
-        <h1 style="text-align: center;">Сообщение админам</h1>
-        <div class="text">
-            <p style="text-align: center;">Тут ничего нет</p>
-        </div>
+        {% if 'userlogged' in session %}
+            {% if status == 'admin' %}
+                <div class="admin">
+                    <div class="text">
+                        <h1>Последние сообщения:</h1>
+                        <hr>
+                        {% for c in contact %}
+                            <p><a href="{{url_for('contact', id_contact=c.id)}}">{{c.title}}</a> <span>{{c.time}}</span></p>
+                            {% if c.text[100] %}
+                                <p>{{c.text[:100]}}...</p>
+                            {% else %}
+                                <p>{{c.text[:100]}}</p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% else %}
+                <h1 style="text-align: center;">Сообщения админам</h1>
+                <hr width="50%">
+                <form method="post" class="form">
+                    <input placeholder="Заголовок" name="title" required>
+                    <input placeholder="Текст" name="text" required>
+                    <button type="submit">Отправить</button>
+                </form>
+                <hr width="50%">
+                <div class="text">
+                    <p style="text-align: center;">Тут ничего нет</p>
+                </div>
+            {% endif %}
+        {% else %}
+            <h1 style="text-align: center;">Сообщения админам</h1>
+            <hr width="50%">
+            <div class="contact-unreg"><a style="color: purple;" href="{{url_for('register')}}">Зарегестрируйтесь</a> или <a style="text-decoration: underline; color: purple;" onclick="document.getElementById('id01').style.display='block'">Войдите</a> чтобы доложить о баге</div>
+            <div class="text">
+                <p style="text-align: center;">Тут ничего нет</p>
+            </div>
+        {% endif %}
     {% endif %}
 </div>
 {% endblock %}
