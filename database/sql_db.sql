@@ -8,7 +8,7 @@ create table if not exists game (
 id integer primary key autoincrement,
 title text not null,
 info text not null,
-url text not null
+url text not null unique
 );
 
 create table if not exists users (

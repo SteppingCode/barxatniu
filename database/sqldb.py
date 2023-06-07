@@ -150,12 +150,21 @@ class DataBase:
 
     def getGame(self, arg):
         try:
-            self.__cur.execute(f"SELECT * FROM game WHERE id = {arg} LIMIT 1")
+            self.__cur.execute(f"SELECT * FROM game WHERE id = {arg}")
             res = self.__cur.fetchone()
             if res: return res
         except sq.Error as e:
             print(str(e))
         return (False, False)
+
+    def getGameByUrl(self, url):
+        try:
+            self.__cur.execute(f"SELECT * FROM game WHERE url == ?", (url,))
+            res = self.__cur.fetchone()
+            if res: return res
+        except sq.Error as e:
+            print(str(e))
+        return []
 
     def getGames(self):
         try:
@@ -321,5 +330,5 @@ if __name__ == "__main__":
     #print(db.addMenu('Список игр', 'game_list'))
     #print(db.delUser(0))
     #print(db.addGame('Quiz', 'Квиз. описание потом напишем', 'quiz'))
-    #print(db.addGame('Колесо удачи', 'Колесо удачи. описание потом напишем', 'spin'))
+    #print(db.addGame('Колесо удачи', 'Колесо удачи. описание потом напишем', 'wheel'))
     #print(db.addGame('Найди ошибку', 'Найди ошибку. описание потом напишем', 'find_a_mistake'))

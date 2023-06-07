@@ -76,13 +76,12 @@
                 <h2 style="color: purple;">{{g['title']}}</h2>
                 <p>{{g['info'][:20]}}...</p>
             {% else %}
-                <h2><a href="{{url_for('game_choice', id_game=g['id'])}}" style="text-decoration:none; color: black;">{{g['title']}}</a></h2>
+                <h2><a href="{{url_for('game_choice', url=g['url'])}}" style="text-decoration:none; color: black;">{{g['title']}}</a></h2>
                 <p>{{g['info'][:20]}}...</p>
             {% endif %}
         {% endfor %}
     </div>
 </div>
-<script>
-</script>
+<script></script>
 {% endif %}
 {% endblock %}

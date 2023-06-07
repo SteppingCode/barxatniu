@@ -74,20 +74,20 @@ def register():
     return render_template('register.html', title='Регистрация', menu=database.getMenu())
 
 #game choice
-@app.route('/game/<int:id_game>', methods=['POST' , 'GET'])
-def game_choice(id_game):
+@app.route('/game/<url>', methods=['POST' , 'GET'])
+def game_choice(url):
     db = connect_db()
     database = DataBase(db)
     if 'userlogged' in session:
         return render_template('game_choice.html', menu=database.getMenu(),
-                                title=database.getGame(id_game)['title'],
+                                title=database.getGameByUrl(url)['title'],
                                 status=database.getStatus(session['userlogged']),
-                                game=database.getGame(id_game), games=database.getGames(),
-                                id_game=random.randint(0, 9999))
-    return render_template('game_choice.html', title=database.getGame(id_game)['title'], 
+                                game=database.getGameByUrl(url), games=database.getGames(),
+                                id_game=random.randint(0, 999999999))
+    return render_template('game_choice.html', title=database.getGameByUrl(url)['title'],
                                 menu=database.getMenu(),
-                                game=database.getGame(id_game), games=database.getGames(),
-                                id_game=random.randint(0, 9999))
+                                game=database.getGameByUrl(url), games=database.getGames(),
+                                id_game=random.randint(0, 999999999))
 
 #admin page
 @app.route('/admin', methods=['POST', 'GET'])
@@ -251,7 +251,7 @@ def game_list():
 def game(url, id_game):
     db = connect_db()
     database = DataBase(db)
-    id_game = random.randint(0, 99999)
+    id_game=random.randint(0, 999999999)
     if 'userlogged' in session:
         return render_template('game.html', menu=database.getMenu(), status=database.getStatus(session['userlogged']),
                                 title='a')

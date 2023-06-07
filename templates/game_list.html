@@ -17,7 +17,7 @@
 {% if games %}
     {% for g in games %}
         <div id="game_title">
-            <h1><a href="{{ url_for('game_choice', id_game=g.id) }}">{{g.title}}</a></h1>
+            <h1><a href="{{ url_for('game_choice', url=g.url) }}">{{g.title}}</a></h1>
         </div>
         <div id="game_info">
             {% if g.info[100] %}
