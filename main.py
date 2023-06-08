@@ -253,8 +253,8 @@ def game(url, id_game):
     database = DataBase(db)
     id_game=random.randint(0, 999999999)
     if 'userlogged' in session:
-        return render_template('game.html', menu=database.getMenu(), status=database.getStatus(session['userlogged']),
-                                title='a')
+        return render_template(f'/games/{url}.html', menu=database.getMenu(), status=database.getStatus(session['userlogged']),
+                                title=url)
     else:
         flash('Войдите в свой аккаунт', category='error')
         return redirect(url_for('start_page'))
