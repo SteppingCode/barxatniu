@@ -24,9 +24,6 @@
                 {% if status == 'admin' %}
                     <li><a href="{{url_for('admin_page')}}">Админ</a></li>
                 {% endif %}
-                {% if status == 'student' %}
-                    <li><a href="{{url_for('quit')}}">Подключиться к игре</a></li>
-                {% endif %}
                 <li><a href="{{url_for('quit')}}">Выход</a></li>
             {% else %}
                 <li><a onclick="document.getElementById('id01').style.display='block'" style="float: right;">Вход</a></li>
