@@ -18,7 +18,7 @@
         <ul class="menu">
             <a href="{{url_for('start_page')}}"><img src="/static/img/favicon.png" width="40" height="40" style="margin-top: 6px; float: left; margin-left: 18px;"></a>
             {% for m in menu -%}
-                <li><a href="{{url_for(m.url)}}">{{m.title}}</a></li>
+                <li><a href="{{url_for('game_choice', url=m.url)}}">{{m.title}}</a></li>
             {% endfor -%}
             {% if 'userlogged' in session %}
                 {% if status == 'admin' %}
@@ -41,8 +41,8 @@
                         <div class="flash {{cat}}"> {{msg}}</div>
                     {% endfor %}
                     <div style="display: flex; flex-direction: column; padding-top: 20px;">
-                        <input type="text" placeholder="Логин" name="nick" required pattern="[A-za-z1-0]*">
-                        <input type="password" placeholder="Пароль" name="psw" required pattern="[A-za-z1-0]*">
+                        <input id="log" type="text" placeholder="Логин" name="nick" required pattern="[A-za-z1-0]*">
+                        <input id="pass" type="password" placeholder="Пароль" name="psw" required pattern="[A-za-z1-0]*">
                     </div>
                     <button id="btn" type="submit" class="signupbtn">Вход</button>
                     <p>Еще нету аккаунта? <a style="text-decoration: none;" onclick="modal.style.display = 'none';" href="{{url_for('register')}}">Создать аккаунт</a></p>

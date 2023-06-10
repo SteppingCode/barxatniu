@@ -4,30 +4,37 @@
 <style>
     .question-unreg {
         display: inline-block;
-        border: 1px black solid;
+        border: 2px black solid;
         border-radius: 12px;
         padding: 10px;
         text-align: center;
-        margin-left: 10%;
-        width: 60%;
+        margin-left: 11%;
+        width: 59.5%;
     }
     .question {
         display: flex;
         align-items: center;
         flex-direction: column;
-        border: 1px black solid;
+        border: 2px black solid;
         border-radius: 12px;
         padding: 10px;
-        margin-left: 10%;
-        width: 60%;
+        margin-left: 11%;
+        width: 59.5%;
+    }
+    .question label input {
+        width: 600px;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border: none;
+        background-color: #ddd;
+        outline: none;
+        border: 1px black solid;
     }
     .reports {
         margin-top: 20px;
         padding: 8px;
         border-radius: 12px;
-        border-left: 1px black solid;
-        border-right: 1px black solid;
-        border-top: 1px black solid;
+        border: 2px black solid;
         margin-left: 49.5%;
         transform: translate(-65%);
         width: 60%;
@@ -43,7 +50,6 @@
         padding-left: 8px;
     }
     #text {
-        width: auto;
         padding: 15px;
         margin: 5px 0 22px 0;
         border: none;
@@ -78,6 +84,9 @@
         margin-left: 22px;
         font-size: 24px;
     }
+    #btn {
+        width: 630px;
+    }
     @media (max-width: 992px) {
         .main {
             margin-top: 20%;
@@ -94,6 +103,29 @@
         .main .question-unreg {
             width: 58.5%;
         }
+        .question label input {
+            width: 490px;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            border: none;
+            background-color: #ddd;
+            outline: none;
+            border: 1px black solid;
+        }
+        #text {
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            border: none;
+            background-color: #ddd;
+            outline: none;
+            width: 490px;
+            max-width: 490px;
+            min-width: 490px;
+            border: 1px black solid;
+        }
+        #btn {
+            width: 525px;
+        }
     }
 </style>
 <div class="main">
@@ -101,9 +133,9 @@
     {% if 'userlogged' in session %}
     <form method="post">
         <div class="question">
-            <label><input style="width: 600px; border: 1px black solid; background-color: #ddd;" type="text" placeholder="Заголовок" name="name" required></label>
+            <label><input type="text" placeholder="Заголовок" name="name" required></label>
             <label><textarea id="text" placeholder="Текст" name="about" required></textarea></label>
-            <button style="width: 630px;" type="submit" id="btn">Отправить</button>
+            <button type="submit" id="btn">Отправить</button>
         </div>
     </form>
     {% else %}
@@ -130,7 +162,7 @@
     {% endif %}
 </div>
 <div class="main" style="margin-top: 0;">
-    <div class="reports">
+    <div class="reports" style="margin-left: 50.5%;">
         <div style="display: flex; justify-content: space-around; font-family: Arial, monospace;">
             <div class="buttons">
                 <button id="btn_unsolved" type="button">Нерешенные</button>

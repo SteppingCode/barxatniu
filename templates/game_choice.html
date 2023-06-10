@@ -8,7 +8,6 @@
   .game {
         justify-content: column;
         width: 75%;
-        overflow: auto;
   }
   #id02 {
         display: none;
@@ -62,8 +61,7 @@
       <h1 id="game_title">{{game['title']}}</h1>
       <p id="game_info">{{game['info']}}</p>
       {% if status == 'teacher' %}
-        <input type="button" value="Создать игру" id="btn_start" onclick="document.getElementById('id02').style.display='block'; document.getElementById('btn_end').style.display='block'; document.getElementById('btn_start').style.display='none';">
-        <input type="button" style="display: none;" value="Назад" id="btn_end" onclick="document.getElementById('id02').style.display='none'; document.getElementById('btn_start').style.display='block'; document.getElementById('btn_end').style.display='none';">
+        <a style="text-decoration: none; color: black;" href="{{url_for('game', url=game.url, id_game=id_game)}}" id="btn_start">Создать игру</a>
         <div id="id02" class="quiz">
             <form class="quiz-content" method="post" action="{{url_for('game', url=game['url'], id_game=id_game)}}">
               <div class="cont">
