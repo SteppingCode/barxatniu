@@ -211,5 +211,19 @@ footer #other a {
         }
         footer {
             margin-top: 180%;
+            font-size: 30px;
+        }
+        footer #author {
+            margin-left: 20%;
+        }
+        footer #other {
+            display: flex;
+            margin-top: 20px;
+            justify-content: space-around;
+            flex-direction: column;
+        }
+        footer #other ul li {
+            margin-top: 26px;
+            list-style-type: circle;
         }
     }
