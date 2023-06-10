@@ -201,9 +201,10 @@ footer #other a {
 
 @media (max-width: 992px) {
         .modal-content {
+            margin-top: 50%;
             font-size: 35px;
             width: 75%;
-            height: 30%;
+            height: 26%;
         }
         .modal-content input {
             font-size: 25px;
