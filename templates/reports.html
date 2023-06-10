@@ -79,25 +79,39 @@
         font-size: 24px;
     }
     @media (max-width: 992px) {
-        .question-unreg {
-
+        .main {
+            margin-top: 20%;
+            width: 95%;
+        }
+        .border-list {
+            left: 72%;
+            width: 26%;
+            top: 12.5%;
+        }
+        .border-list h2 {
+            margin-left: 20px;
+        }
+        .main .question-unreg {
+            width: 58.5%;
         }
     }
 </style>
-<h1 style="margin-left: 10%;">Актуальные баги</h1>
-{% if 'userlogged' in session %}
-<form method="post">
-    <div class="question">
-        <label><input style="width: 600px; border: 1px black solid; background-color: #ddd;" type="text" placeholder="Заголовок" name="name" required></label>
-        <label><textarea id="text" placeholder="Текст" name="about" required></textarea></label>
-        <button style="width: 630px;" type="submit" id="btn">Отправить</button>
-    </div>
-</form>
-{% else %}
-    <div class="question-unreg"><a style="color: purple;" href="{{url_for('register')}}">Зарегестрируйтесь</a> или <a style="text-decoration: underline; color: purple;" onclick="document.getElementById('id01').style.display='block'">Войдите</a> чтобы доложить о баге</div>
-{% endif %}
+<div class="main">
+    <h1 style="margin-left: 10%;">Актуальные баги</h1>
+    {% if 'userlogged' in session %}
+    <form method="post">
+        <div class="question">
+            <label><input style="width: 600px; border: 1px black solid; background-color: #ddd;" type="text" placeholder="Заголовок" name="name" required></label>
+            <label><textarea id="text" placeholder="Текст" name="about" required></textarea></label>
+            <button style="width: 630px;" type="submit" id="btn">Отправить</button>
+        </div>
+    </form>
+    {% else %}
+        <div class="question-unreg"><a style="color: purple;" href="{{url_for('register')}}">Зарегестрируйтесь</a> или <a style="text-decoration: underline; color: purple;" onclick="document.getElementById('id01').style.display='block'">Войдите</a> чтобы доложить о баге</div>
+    {% endif %}
+</div>
 <div class="border-list">
-    <h1 style="font-family: Arial, monospace; font-size: 40px;">Последние репорты:</h1>
+    <h2 style="font-family: Arial, monospace; font-size: 40px;">Последние репорты:</h2>
     {% if reports %}
         {% for i in lastreps %}
             {% if i.status == 'solved' %}
@@ -115,51 +129,53 @@
         <p style="text-align: center;">Тут ничего нет)</p>
     {% endif %}
 </div>
-<div class="reports">
-    <div style="display: flex; justify-content: space-around; font-family: Arial, monospace;">
-        <div class="buttons">
-            <button id="btn_unsolved" type="button">Нерешенные</button>
+<div class="main" style="margin-top: 0;">
+    <div class="reports">
+        <div style="display: flex; justify-content: space-around; font-family: Arial, monospace;">
+            <div class="buttons">
+                <button id="btn_unsolved" type="button">Нерешенные</button>
+            </div>
+            <div class="buttons">
+                <button id="btn_solved" type="button">Решенные</button>
+            </div>
         </div>
-        <div class="buttons">
-            <button id="btn_solved" type="button">Решенные</button>
-        </div>
+        {% if reports %}
+            <div id="unsolved-content">
+                {% for r in reports_unsolved %}
+                    <div>
+                        <h2><a href="{{url_for('showReport', id_rep=r.id)}}" style="text-decoration: none;">{{r.name}}</a>
+                            <span class="time">{{r.time}}</span></h2>
+                        {% if status == 'admin' %}
+                            <a href="{{url_for('delreport', id_rep=r.id)}}">Удалить</a>
+                        {% endif %}
+                        {% if r.about[100] %}
+                            <p>{{r.about[:100]}}...</p>
+                        {% else %}
+                            <p>{{r.about[:100]}}</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div id="solved-content">
+                {% for r in reports_solved %}
+                    <div>
+                        <h2><a href="{{url_for('showReport', id_rep=r.id)}}" style="text-decoration: none;">{{r.name}}</a> <span style="color: green;">✔</span>
+                            <span class="time">{{r.time}}</span></h2>
+                        {% if status == 'admin' %}
+                            <a href="{{url_for('delreport', id_rep=r.id)}}">Удалить</a>
+                        {% endif %}
+                        {% if r.about[100] %}
+                            <p>{{r.about[:100]}}...</p>
+                        {% else %}
+                            <p>{{r.about[:100]}}</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div style="text-align: center; margin-top: 5%; margin-bottom: 5%;">Тут ничего нет)</div>
+        {% endif %}
     </div>
-    {% if reports %}
-        <div id="unsolved-content">
-            {% for r in reports_unsolved %}
-                <div>
-                    <h2><a href="{{url_for('showReport', id_rep=r.id)}}" style="text-decoration: none;">{{r.name}}</a>
-                        <span class="time">{{r.time}}</span></h2>
-                    {% if status == 'admin' %}
-                        <a href="{{url_for('delreport', id_rep=r.id)}}">Удалить</a>
-                    {% endif %}
-                    {% if r.about[100] %}
-                        <p>{{r.about[:100]}}...</p>
-                    {% else %}
-                        <p>{{r.about[:100]}}</p>
-                    {% endif %}
-                </div>
-            {% endfor %}
-        </div>
-        <div id="solved-content">
-            {% for r in reports_solved %}
-                <div>
-                    <h2><a href="{{url_for('showReport', id_rep=r.id)}}" style="text-decoration: none;">{{r.name}}</a> <span style="color: green;">✔</span>
-                        <span class="time">{{r.time}}</span></h2>
-                    {% if status == 'admin' %}
-                        <a href="{{url_for('delreport', id_rep=r.id)}}">Удалить</a>
-                    {% endif %}
-                    {% if r.about[100] %}
-                        <p>{{r.about[:100]}}...</p>
-                    {% else %}
-                        <p>{{r.about[:100]}}</p>
-                    {% endif %}
-                </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <div style="text-align: center; margin-top: 5%; margin-bottom: 5%;">Тут ничего нет)</div>
-    {% endif %}
 </div>
 <script>
     var solved = document.getElementById('btn_solved');
