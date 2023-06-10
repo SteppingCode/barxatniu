@@ -199,3 +199,16 @@ footer #other a {
 }
 
 
+@media (max-width: 992px) {
+        .modal-content {
+            font-size: 35px;
+            width: 75%;
+            height: 23%;
+        }
+        .modal-content input {
+            font-size: 25px;
+        }
+        footer {
+            margin-top: 130%;
+        }
+    }

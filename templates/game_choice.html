@@ -3,54 +3,57 @@
 {{ super() }}
 <style>
   .content-block {
-    display: flex;
+        display: flex;
   }
   .game {
-    justify-content: column;
-    width: 75%;
-    overflow: auto;
+        justify-content: column;
+        width: 75%;
+        overflow: auto;
   }
   #id02 {
-    display: none;
+        display: none;
   }
   #game_title {
-    margin: 50px;
+        margin: 50px;
   }
   #game_title a {
-    text-decoration: none;
+        text-decoration: none;
   }
   #game_info {
-    width: 75%;
-    margin-left: 50px;
-    font-size: 40px;
-    overflow: auto;
+        width: 75%;
+        margin-left: 50px;
+        font-size: 40px;
+        overflow: auto;
   }
   #teacher_btn {
-    border: 1px black solid;
-    width: auto;
-    text-decoration: none;
-    padding: 8px;
+        border: 1px black solid;
+        width: auto;
+        text-decoration: none;
+        padding: 8px;
   }
   .border-list {
-    width: 22%;
-    position: absolute;
-    border-left: 2px black solid;
-    border-bottom: 2px black solid;
-    left: 76%;
-    top: 8%;
-    padding-left: 8px;
+        width: 22%;
+        position: absolute;
+        border-left: 2px black solid;
+        border-bottom: 2px black solid;
+        left: 76%;
+        top: 8%;
+        padding-left: 8px;
   }
   .cont input {
-    display: flex;
-    align-items: column;
+        display: flex;
+        align-items: column;
   }
   #btn_start, #btn_end {
-    margin-left: 70%;
-    transform: translate(-50%, 50%);
-    border: 1px black solid;
-    border-radius: 20px;
-    padding: 16px;
-    font-size: 24px;
+        margin-left: 70%;
+        transform: translate(-50%, 50%);
+        border: 1px black solid;
+        border-radius: 20px;
+        padding: 16px;
+        font-size: 24px;
+  }
+  @media (max-width: 992px) {
+
   }
 </style>
 {% if game %}

@@ -97,8 +97,31 @@
     footer {
         margin-top: 50%;
     }
+    @media (max-width: 992px) {
+        body {
+            background-color: grey;
+        }
+        #video-full {
+            display: none;
+        }
+        footer {
+            margin-top: 130%;
+        }
+        .regis-content {
+            margin-top: 35%;
+        }
+        .container {
+            font-size: 25px;
+        }
+        .container input {
+            font-size: 30px;
+        }
+        #btn {
+            font-size: 25px;
+        }
+    }
 </style>
-<video id="video-full" src="/static/video/video2.mp4" width="100%;" height="auto" loop muted autoplay typeof="mp4">
+<video id="video-full" src="/static/video/video2.mp4" width="100%" height="auto" loop muted autoplay typeof="mp4">
 </video>
 <form class="regis-content" method="post">
     <div class="container">
