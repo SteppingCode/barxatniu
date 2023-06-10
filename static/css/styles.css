@@ -203,12 +203,12 @@ footer #other a {
         .modal-content {
             font-size: 35px;
             width: 75%;
-            height: 23%;
+            height: 25%;
         }
         .modal-content input {
             font-size: 25px;
         }
         footer {
-            margin-top: 130%;
+            margin-top: 180%;
         }
     }
