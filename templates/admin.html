@@ -15,27 +15,6 @@
         flex-direction: row-reverse;
         justify-content: space-around;
     }
-    #status_content1, #status_content2, #status_content3 {
-        display: none;
-    }
-    #change_status1, #change_status2, #change_status3 {
-        border: 1px black solid;
-        border-radius: 12px;
-        padding: 12px;
-        color: white;
-    }
-    #change_status1:hover, #change_status2:hover, #change_status3:hover {
-        color: yellow;
-    }
-    #change_status1 {
-        background-color: brown;
-    }
-    #change_status2 {
-        background-color: blue;
-    }
-    #change_status3 {
-        background-color: red;
-    }
     .btns {
         text-decoration: none;
         color: white;
@@ -50,6 +29,15 @@
     .btns:hover {
         opacity: .6;
     }
+    .sumbitbtns {
+        padding: 12px;
+        border-radius: 12px;
+        width: 200px;
+    }
+    .sumbitbtns:hover {
+        color: white;
+        background-color: grey;
+    }
 </style>
 <video src="" typeof="mp4" autoplay loop muted style="position: absolute; opacity: .6; z-index: -1;" width="100%"></video>
 <a style="background-color: blue;" class="btns" href="{{url_for('contact_page')}}">Контакты</a> <a style="background-color: red;" class="btns" href="{{url_for('reports_page')}}">Репорты</a>
@@ -61,14 +49,17 @@
                 <p style="color: brown;"><strong>{{i.nick}}</strong></p>
                 <p>{{i.age}}</p>
                 <p>{{i.name}}</p>
-                <div id="status_content1">
-                    <form method="post" action="{{url_for('status_change', id_user=i.id)}}">
-                        <p style="color: brown;"><strike>{{i.status}}</strike><label> <span style="font-size: 24px; color: red;">→</span> <input placeholder="Статус" name="status" required></label></p>
-                        <button type="submit">Подтвердить</button> <button type="button" onclick="document.getElementById('status_content1').style.display='none'; document.getElementById('change_status1').style.display='block'; document.getElementById('status1').style.display='block';">Отменить</button>
-                    </form>
-                </div>
-                <p id="status1" style="transform: uppercase; color: brown;">{{i.status}}</p>
-                <button style="width: 200px;" id="change_status1" onclick="document.getElementById('status_content1').style.display='block'; document.getElementById('change_status1').style.display='none'; document.getElementById('status1').style.display='none';">Изменить статус пользователя</button>
+                <form method="post" action="{{url_for('status_change', id_user=i.id)}}">
+                    <div class="radios">
+                        <input id="radio-1" type="radio" value="admin" name="radio">
+                        <label for="radio-1" style="color: red;">Админ</label>
+                        <input id="radio-2" type="radio" value="student" name="radio">
+                        <label for="radio-2" style="color: blue;">Ученик</label>
+                        <input id="radio-3" type="radio" value="teacher" name="radio" checked>
+                        <label for="radio-3" style="color: brown;">Учитель</label>
+                    </div>
+                    <button class="sumbitbtns" type="submit">Подтвердить</button>
+                </form>
             {% endif %}
         {% endfor %}
     </div>
@@ -79,14 +70,17 @@
                 <p style="color: blue;"><strong>{{i.nick}}</strong></p>
                 <p>{{i.age}}</p>
                 <p>{{i.name}}</p>
-                <div id="status_content2">
-                    <form method="post" action="{{url_for('status_change', id_user=i.id)}}">
-                        <p style="color: blue;"><strike>{{i.status}}</strike><label> <span style="font-size: 24px; color: red;">→</span> <input placeholder="Статус" name="status" required></label></p>
-                        <button type="submit">Подтвердить</button> <button type="button" onclick="document.getElementById('status_content2').style.display='none'; document.getElementById('change_status2').style.display='block'; document.getElementById('status2').style.display='block';">Отменить</button>
-                    </form>
-                </div>
-                <p id="status2" style="transform: uppercase; color: blue;">{{i.status}}</p>
-                <button style="width: 200px;" id="change_status2" onclick="document.getElementById('status_content2').style.display='block'; document.getElementById('change_status2').style.display='none'; document.getElementById('status2').style.display='none';">Изменить статус пользователя</button>
+                <form method="post" action="{{url_for('status_change', id_user=i.id)}}">
+                    <div class="radios">
+                        <input id="radio-4" type="radio" value="admin" name="radio">
+                        <label for="radio-4" style="color: red;">Админ</label>
+                        <input id="radio-5" type="radio" value="student" name="radio" checked>
+                        <label for="radio-5" style="color: blue;">Ученик</label>
+                        <input id="radio-6" type="radio" value="teacher" name="radio">
+                        <label for="radio-6" style="color: brown;">Учитель</label>
+                    </div>
+                    <button class="sumbitbtns" type="submit">Подтвердить</button>
+                </form>
             {% endif %}
         {% endfor %}
     </div>
@@ -97,17 +91,20 @@
                 <p style="color: red;"><strong>{{i.nick}}</strong></p>
                 <p>{{i.age}}</p>
                 <p>{{i.name}}</p>
-                <div id="status_content3">
-                    <form method="post" action="{{url_for('status_change', id_user=i.id)}}">
-                        <p style="color: red;"><strike>{{i.status}}</strike><label> <span style="font-size: 24px; color: red;">→</span> <input placeholder="Статус" name="status" required></label></p>
-                        <button type="submit">Подтвердить</button> <button type="button" onclick="document.getElementById('status_content3').style.display='none'; document.getElementById('change_status3').style.display='block'; document.getElementById('status3').style.display='block';">Отменить</button>
-                    </form>
-                </div>
                 {% if session['userlogged'] == 'bIades' or session['userlogged'] == 'huilan91' %}
-                    <p id="status3" style="transform: uppercase; color: red;">{{i.status}}</p>
-                    <button style="width: 200px;" id="change_status3" onclick="document.getElementById('status_content3').style.display='block'; document.getElementById('change_status3').style.display='none'; document.getElementById('status3').style.display='none';">Изменить статус пользователя</button>
+                    <form method="post" action="{{url_for('status_change', id_user=i.id)}}">
+                        <div class="radios">
+                            <input id="radio-7" type="radio" value="admin" name="radio" checked>
+                            <label for="radio-7" style="color: red;">Админ</label>
+                            <input id="radio-8" type="radio" value="student" name="radio">
+                            <label for="radio-8" style="color: blue;">Ученик</label>
+                            <input id="radio-9" type="radio" value="teacher" name="radio">
+                            <label for="radio-9" style="color: brown;">Учитель</label>
+                        </div>
+                        <button class="sumbitbtns" type="submit">Подтвердить</button>
+                    </form>
                 {% else %}
-                    <p style="transform: uppercase; color: red;">{{i.status}}</p>
+                    <p style="transform: uppercase; color: red;">Админ</p>
                 {% endif %}
             {% endif %}
         {% endfor %}

@@ -98,7 +98,8 @@ def admin_page():
         if database.getStatus(session['userlogged']) == 'admin':
             return render_template('admin.html', menu=database.getMenu(),\
                                     status=database.getStatus(session['userlogged']),
-                                    users=database.getUsers())
+                                    users=database.getUsers(),
+                                    title='Админ страница')
     return redirect(url_for('start_page'))
 
 #status changing
@@ -108,9 +109,9 @@ def status_change(id_user):
     database = DataBase(db)
     if 'userlogged' in session:
         if database.getStatus(session['userlogged']) == 'admin':
-            if request.form['status'] == 'teacher' or request.form['status'] == 'student' or \
-                request.form['status'] == 'admin':
-                if database.UpdateStatus(id_user, request.form['status']):
+            if request.form['radio'] == 'teacher' or request.form['radio'] == 'student' or \
+                request.form['radio'] == 'admin':
+                if database.UpdateStatus(id_user, request.form['radio']):
                     return redirect(url_for('admin_page'))
             else:
                 flash('Некорректный статус', category='error')
