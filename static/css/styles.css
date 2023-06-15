@@ -225,4 +225,7 @@ footer #other a {
             margin-top: 26px;
             list-style-type: circle;
         }
+        ul.menu li {
+            font-size: 18px;
+        }
     }
