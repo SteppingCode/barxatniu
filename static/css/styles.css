@@ -198,6 +198,10 @@ footer #other a {
     padding-right: 80px;
 }
 
+#Stepin,#Paleev,#Ydoratin {
+    display: none;
+}
+
 @media (max-width: 992px) {
         .modal-content {
             margin-top: 50%;

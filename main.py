@@ -197,45 +197,6 @@ def quit():
     else:
         return redirect(url_for('start_page'))
 
-#contact
-@app.route('/contact', methods=['POST', 'GET'])
-def contact_page():
-    db = connect_db()
-    database = DataBase(db)
-    if 'userlogged' in session:
-        if request.method == 'POST':
-            if database.addContact(session['userlogged'], request.form['title'], request.form['text']):
-                flash('Спасибо за ваше сообщение!', category='success')
-                return redirect(url_for('contact_page'))
-        return render_template('contact.html', title='Контакт', menu=database.getMenu(),\
-                                status=database.getStatus(session['userlogged']), contact=database.getContacts())
-    return render_template('contact.html', title='Контакт', menu=database.getMenu(), contact=database.getContacts())
-
-#contact page
-@app.route('/contact/<int:id_contact>', methods=['POST', 'GET'])
-def contact(id_contact):
-    db = connect_db()
-    database = DataBase(db)
-    if 'userlogged' in session:
-        return render_template('contact_page.html', title=database.getContact(id_contact)['title'],
-                                menu=database.getMenu(),
-                                status=database.getStatus(session['userlogged']),
-                                contact=database.getContact(id_contact))
-    return render_template('contact_page.html', title=database.getContact(id_contact)['title'],
-                            menu=database.getMenu(),
-                            contact=database.getContact(id_contact))
-
-#contact page
-@app.route('/delcontact/<int:id_contact>', methods=['POST', 'GET'])
-def delcontact(id_contact):
-    db = connect_db()
-    database = DataBase(db)
-    if 'userlogged' in session:
-        if database.getStatus(session['userlogged']) == 'admin':
-            database.delContact(id_contact)
-            return redirect(url_for('contact_page'))
-    return redirect(url_for('contact', id_contact=id_contact))
-
 #game list
 @app.route('/game_list', methods=['POST', 'GET'])
 def game_list():
