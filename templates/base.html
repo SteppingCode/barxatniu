@@ -46,33 +46,18 @@
                 </div>
             </form>
         </div>
-        <div id="Stepin" class="modal">
-            <div class="modal-content">
-                <h1>Информация</h1>
-            </div>
-        </div>
-        <div id="Paleev" class="modal">
-            <div class="modal-content">
-                <h1>Информация</h1>
-            </div>
-        </div>
-        <div id="Ydoratin" class="modal">
-            <div class="modal-content">
-                <h1>Информация</h1>
-            </div>
-        </div>
 </div>
 <script>
 var modal = document.getElementById('id01');
 
 window.onclick = function(event) {
-  if (event.target == modal || document.getElementById('Stepin') || document.getElementById('Paleev') || document.getElementById('Ydoratin')) {
+  if (event.target == modal) {
     modal.style.display = "none";
   }
 }
 </script>
 <footer>
-    <span id="author"><a href="{{url_for('start_page')}}"><img src="/static/img/favicon.png" width="40px" height="40px" style="margin-right: 12px;"></a> &copy; 2023 <a onclick="document.getElementById('Stepin').style.display='block'">Степин Е.А.</a>, <a onclick="document.getElementById('Paleev').style.display='block'">Палеев Г.А.</a> и <a onclick="document.getElementById('Ydoratin').style.display='block'">Удоратин И.О.</a></span>
+    <span id="author"><a href="{{url_for('start_page')}}"><img src="/static/img/favicon.png" width="40px" height="40px" style="margin-right: 12px;"></a> &copy; 2023 <a href="https://vk.com/z.stepin">Степин Е.А.</a>, <a href="https://vk.com/glebuuus">Палеев Г.А.</a> и <a href="https://vk.com/itopg">Удоратин И.О.</a></span>
     <span id="other">
         <ul>
             <li><a href="https://github.com/dodik337/barxatniu">Source code</a></li>

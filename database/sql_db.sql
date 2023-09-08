@@ -37,10 +37,10 @@ idrep integer not null,
 time integer not null
 );
 
-create table if not exists contact (
+create table if not exists books (
 id integer primary key autoincrement,
-user text not null,
 title text not null unique,
-text text not null,
-time integer not null
+description text not null,
+url text not null,
+img_url text not null
 );

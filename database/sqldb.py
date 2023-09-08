@@ -282,51 +282,15 @@ class DataBase:
             print(str(e))
         return []
 
-    def addContact(self, user, title, text):
-        try:
-            time = datetime.date.today()
-            self.__cur.execute("INSERT INTO contact VALUES (NULL, ?, ?, ?, ?)", (user, title, text, time))
-            self.__db.commit()
-        except sq.Error as e:
-            print(str(e))
-            return False
-        return True
-
-    def delContact(self, id=0):
-        try:
-            if id == 0:
-                self.__cur.execute("DELETE FROM contact")
-            else:
-                self.__cur.execute(f"DELETE FROM contact WHERE id == {id}")
-            self.__db.commit()
-        except sq.Error as e:
-            print(str(e))
-            return False
-        return True
-
-    def getContacts(self):
-        try:
-            self.__cur.execute(f"SELECT * FROM contact ORDER BY id DESC LIMIT 20")
-            res = self.__cur.fetchall()
-            if res: return res
-        except sq.Error as e:
-            print(str(e))
-        return []
-
-    def getContact(self, id):
-        try:
-            self.__cur.execute(f"SELECT * FROM contact WHERE id == {id}")
-            res = self.__cur.fetchone()
-            if res: return res
-        except sq.Error as e:
-            print(str(e))
-        return []
+    #def addBook(self, title, description, url, img_url):
+    #    try:
+    #        self.__cur.execute(f"INSERT INTO books VALUES(null, ?, ?, ?, ?)")
 
 
 if __name__ == "__main__":
     db = connect_db()
     db = DataBase(db)
-    #create_db()
+    create_db()
     #print(db.addMenu('Список игр', 'game_list'))
     #print(db.delUser(0))
     #print(db.addMenu('Quiz', 'quiz'))
