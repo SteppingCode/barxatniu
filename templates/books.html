@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+{{ super() }}
+<div>
+    {% if books %}
+        <img src="{{books.img_url}}">
+    {% endif %}
+</div>
+{% endblock %}

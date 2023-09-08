@@ -221,5 +221,12 @@ def game(url, id_game):
         flash('Войдите в свой аккаунт', category='error')
         return redirect(url_for('start_page'))
 
+#books list
+@app.route('/books_list', methods=['POST', 'GET'])
+def books_list():
+    db = connect_db()
+    database = DataBase(db)
+    return render_template('books.html', menu=database.getMenu(), books=database.getBooks())
+
 if __name__ == "__main__":
     app.run(debug=True)

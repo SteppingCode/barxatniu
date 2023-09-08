@@ -282,15 +282,41 @@ class DataBase:
             print(str(e))
         return []
 
-    #def addBook(self, title, description, url, img_url):
-    #    try:
-    #        self.__cur.execute(f"INSERT INTO books VALUES(null, ?, ?, ?, ?)")
+    def addBook(self, title, description, url, img_url):
+        try:
+            self.__cur.execute(f"INSERT INTO books VALUES(null, ?, ?, ?, ?)", (title, description, url, img_url))
+            self.__db.commit()
+        except sq.Error as e:
+            print(str(e))
+            return False
+        return True
+
+    def delBook(self, id=0):
+        try:
+            if id == 0:
+                self.__cur.execute("DELETE FROM books")
+            else:
+                self.__cur.execute(f"DELETE FROM books WHERE id == {id}")
+            self.__db.commit()
+        except sq.Error as e:
+            print(str(e))
+            return False
+        return True
+
+    def getBooks(self):
+        try:
+            self.__cur.execute("SELECT * FROM books")
+            res = self.__cur.fetchall()
+            if res: return res
+        except sq.Error as e:
+            print(str(e))
+        return []
 
 
 if __name__ == "__main__":
     db = connect_db()
     db = DataBase(db)
-    create_db()
+    #create_db()
     #print(db.addMenu('Список игр', 'game_list'))
     #print(db.delUser(0))
     #print(db.addMenu('Quiz', 'quiz'))
