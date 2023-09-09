@@ -21,7 +21,7 @@ h1 {
 ul.menu {
     list-style: none;
     background: #3F4137;
-    height: 60px;
+    min-height: 60px;
     margin: 0px;
     padding: 0px;
     color: #fdc073;
@@ -54,36 +54,6 @@ ul.menu li {
      1px -1px 1px #000000,
     -1px  1px 1px #000000,
      1px  1px 1px #000000;
-}
-
-ul.menu li .last{
-    float: right;
-}
-
-ul.menu a {
-    color: #fdc073;
-    text-decoration: none;
-}
-
-ul.menu a:hover {
-    color:lightblue;
-}
-
-ul.menu a::after {
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    height: 2px;
-    width: 100%;
-    left: 0;
-    background-color: skyblue;
-    transition: 0.3s;
-    transition-timing-function: ease-in-out;
-    transform: scaleX(0);
-}
-
-ul.menu a:hover::after {
-    transform: scaleX(-1);
 }
 
 #log, #pass {
@@ -200,6 +170,76 @@ footer #other a {
 
 #Stepin,#Paleev,#Ydoratin {
     display: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.dropbtn {
+    position: relative;
+    background: #3F4137;
+    border: none;
+    padding: 20px;
+    color: #fdc073;
+    padding-top: 10px;
+    cursor: pointer;
+    font-family: Arial;
+    font-size: 22px;
+    font-weight: bold;
+    text-shadow:
+    -0   -1px 1px #000000,
+     0   -1px 1px #000000,
+    -0    1px 1px #000000,
+     0    1px 1px #000000,
+    -1px -0   1px #000000,
+     1px -0   1px #000000,
+    -1px  0   1px #000000,
+     1px  0   1px #000000,
+    -1px -1px 1px #000000,
+     1px -1px 1px #000000,
+    -1px  1px 1px #000000,
+     1px  1px 1px #000000,
+    -1px -1px 1px #000000,
+     1px -1px 1px #000000,
+    -1px  1px 1px #000000,
+     1px  1px 1px #000000;
+}
+
+.dropbtn:hover {
+  background-color: white;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: block;
+  position: absolute;
+  min-width: 160px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+  background-color: white;
+  min-height: 100px;
+  z-index: 2;
+}
+
+.dropdown-content li a {
+  position: absolute;
+  font-size: 16px;
+  color: #fdc073;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    position: absolute;
 }
 
 @media (max-width: 992px) {
