@@ -18,42 +18,43 @@ h1 {
     padding: 10px;
 }
 
-ul.menu {
-    list-style: none;
-    background: #3F4137;
-    min-height: 60px;
-    margin: 0px;
-    padding: 0px;
-    color: #fdc073;
-    font-size: 26px;
-    overflow: hidden;
+.list_menu a{
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+	font-size: 25px;
+	color: #fcfffc;
+	font-weight: bold;
+	border-left: 2px solid #F5B7C7;
+	transition: 0.2s ease;
+	padding-left: 5px;
+	text-decoration: none;
 }
-
-ul.menu li {
-    float: left;
-    margin: 10px 40px 0px 50px;
-    position: relative;
-    cursor: pointer;
-    font-family: Arial;
-    font-size: 22px;
-    font-weight: bold;
-    text-shadow:
-    -0   -1px 1px #000000,
-     0   -1px 1px #000000,
-    -0    1px 1px #000000,
-     0    1px 1px #000000,
-    -1px -0   1px #000000,
-     1px -0   1px #000000,
-    -1px  0   1px #000000,
-     1px  0   1px #000000,
-    -1px -1px 1px #000000,
-     1px -1px 1px #000000,
-    -1px  1px 1px #000000,
-     1px  1px 1px #000000,
-    -1px -1px 1px #000000,
-     1px -1px 1px #000000,
-    -1px  1px 1px #000000,
-     1px  1px 1px #000000;
+.list_menu ul {
+    list-style: none;
+}
+.list_menu a:hover{
+	border-left: 2px solid #F5B7C7;
+	transition: 0.2s ease;
+	padding-left: 10px;
+	text-decoration: underline;
+}
+.list_menu li{
+	margin: 20px 0;
+}
+.list_menu{
+	margin-bottom: 50px;
+}
+.menu{
+	padding: 25vh 50px;
+	background: rgba(20, 20, 20, 0.5);
+	height: 100vh;
+	border-right: 7px solid red;
+	position: fixed;
+	left: -300px;
+	transition: 0.4s ease;
+}
+.menu:hover{
+	left: 0;
+	transition: 0.5s ease;
 }
 
 #log, #pass {
@@ -174,72 +175,6 @@ footer #other a {
 
 footer a:hover {
     text-decoration: underline;
-}
-
-.dropbtn {
-    position: relative;
-    background: #3F4137;
-    border: none;
-    padding: 20px;
-    color: #fdc073;
-    padding-top: 10px;
-    cursor: pointer;
-    font-family: Arial;
-    font-size: 22px;
-    font-weight: bold;
-    text-shadow:
-    -0   -1px 1px #000000,
-     0   -1px 1px #000000,
-    -0    1px 1px #000000,
-     0    1px 1px #000000,
-    -1px -0   1px #000000,
-     1px -0   1px #000000,
-    -1px  0   1px #000000,
-     1px  0   1px #000000,
-    -1px -1px 1px #000000,
-     1px -1px 1px #000000,
-    -1px  1px 1px #000000,
-     1px  1px 1px #000000,
-    -1px -1px 1px #000000,
-     1px -1px 1px #000000,
-    -1px  1px 1px #000000,
-     1px  1px 1px #000000;
-}
-
-.dropbtn:hover {
-  background-color: white;
-  border-top-right-radius: 6px;
-  border-top-left-radius: 6px;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: block;
-  position: absolute;
-  min-width: 160px;
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
-  border-bottom-left-radius: 6px;
-  background-color: white;
-  min-height: 100px;
-  z-index: 2;
-}
-
-.dropdown-content li a {
-  position: absolute;
-  font-size: 16px;
-  color: #fdc073;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-    position: absolute;
 }
 
 @media (max-width: 992px) {

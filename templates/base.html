@@ -15,27 +15,25 @@
 {% block content %}
 <div class="wrapper">
     {%- block menu -%}
-            <ul class="menu" id="menu">
-                <a href="{{url_for('start_page')}}"><img src="/static/img/favicon.png" width="40" height="40" style="margin-top: 6px; float: left; margin-left: 18px;"></a>
-                <div class="dropdown">
-                    <button class="dropbtn">Меню</button>
-                    <div class="dropdown-content">
-                        {% for m in menu -%}
-                            <li><a href="{{url_for('game_choice', url=m.url)}}">{{m.title}}</a></li>
-                        {% endfor -%}
-                    </div>
-                </div>
-                {% if 'userlogged' in session %}
-                    {% if status == 'admin' %}
-                        <li><a href="{{url_for('admin_page')}}">Админ</a></li>
+        <div class="menu">
+            <a href="{{url_for('start_page')}}"><img src="/static/img/favicon.png" width="200" height="200" style="margin-top: -220px; float: left; margin-left: 18px;"></a>
+            <div class="list_menu">
+                <ul>
+                    {% for m in menu -%}
+                        <li><a href="{{url_for('game_choice', url=m.url)}}">{{m.title}}</a></li>
+                    {% endfor -%}
+                    {% if 'userlogged' in session %}
+                        {% if status == 'admin' %}
+                            <li><a href="{{url_for('admin_page')}}">Админ</a></li>
+                        {% endif %}
+                        <li><a href="{{url_for('quit')}}">Выход</a></li>
+                    {% else %}
+                        <li><a onclick="document.getElementById('id01').style.display='block'" style="cursor: pointer;">Вход</a></li>
                     {% endif %}
-                    <li><a href="{{url_for('quit')}}">Выход</a></li>
-                {% else %}
-                    <li><a onclick="document.getElementById('id01').style.display='block'" style="float: right;">Вход</a></li>
-                {% endif %}
-            </ul>
-
-        {% endblock menu -%}
+                </ul>
+            </div>
+        </div>
+    {% endblock menu -%}
         <div id="id01" class="modal">
             <form class="modal-content" method="post" action="{{url_for('start_page')}}">
                 <div class="container">
@@ -60,13 +58,6 @@ window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
-}
-
-function changeItem() {
-  document.getElementById('menu').style.height = '160px';
-}
-function rechangeItem() {
-  document.getElementById('menu').style.height = '60px';
 }
 </script>
 <footer>
