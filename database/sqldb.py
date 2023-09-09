@@ -322,3 +322,4 @@ if __name__ == "__main__":
     #print(db.addMenu('Quiz', 'quiz'))
     #print(db.addMenu('Колесо удачи', 'wheel'))
     #print(db.addMenu('Найди ошибку', 'find_a_mistake'))
+    #print(db.addMenu('Библиотека', 'books_list'))

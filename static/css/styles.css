@@ -36,6 +36,7 @@ h1 {
 	transition: 0.2s ease;
 	padding-left: 10px;
 	text-decoration: underline;
+	color: #999999;
 }
 .list_menu li{
 	margin: 20px 0;
