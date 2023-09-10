@@ -48,8 +48,8 @@ def start_page():
             flash('Неверный логин или пароль', category='error')
     if 'userlogged' in session:
         return render_template('index.html', title='Главная', menu=database.getMenu(),\
-                               status=database.getStatus(session['userlogged']))
-    return render_template('index.html', title='Главная', menu=database.getMenu())
+                               status=database.getStatus(session['userlogged']), games=database.getGames())
+    return render_template('index.html', title='Главная', menu=database.getMenu(), games=database.getGames())
 
 #register
 @app.route('/register', methods=['POST', 'GET'])
@@ -71,7 +71,7 @@ def register():
                     flash('Некорректные данные', category='error')
         else:
             flash('Пароли не совпадают', category='error')
-    return render_template('register.html', title='Регистрация', menu=database.getMenu())
+    return render_template('register.html', title='Регистрация', menu=database.getMenu(), games=database.getGames())
 
 #game choice
 @app.route('/game/<url>', methods=['POST' , 'GET'])
@@ -99,7 +99,7 @@ def admin_page():
             return render_template('admin.html', menu=database.getMenu(),\
                                     status=database.getStatus(session['userlogged']),
                                     users=database.getUsers(),
-                                    title='Админ страница')
+                                    title='Админ страница', games=database.getGames())
     return redirect(url_for('start_page'))
 
 #status changing
@@ -134,11 +134,11 @@ def reports_page():
                                 status=database.getStatus(session['userlogged']),
                                 reports_unsolved=database.getUnSolvedReports(),
                                 reports_solved=database.getSolvedReports(), reports=database.getReports(),
-                                lastreps=database.getLastReports())
+                                lastreps=database.getLastReports(), games=database.getGames())
     return render_template('reports.html', title='Репорты', menu=database.getMenu(), reports=database.getReports(),
                             lastreps=database.getLastReports(),
                             reports_unsolved=database.getUnSolvedReports(),
-                            reports_solved=database.getSolvedReports())
+                            reports_solved=database.getSolvedReports(), games=database.getGames())
 
 #report page
 @app.route('/report/<int:id_rep>', methods=['POST', 'GET'])
@@ -154,16 +154,16 @@ def showReport(id_rep):
                                        report=database.getReport(id_rep),
                                        reports=database.getReports(),
                                        lastreps=database.getLastReports(),
-                                       answers=database.getAnswers(id_rep))
+                                       answers=database.getAnswers(id_rep), games=database.getGames())
         return render_template('report_page.html', title=title, menu=database.getMenu(),
                                 status=database.getStatus(session['userlogged']), report=database.getReport(id_rep),
                                 reports=database.getReports(),
                                 lastreps=database.getLastReports(),
-                                answers=database.getAnswers(id_rep))
+                                answers=database.getAnswers(id_rep), games=database.getGames())
     return render_template('report_page.html', title=title, menu=database.getMenu(), report=database.getReport(id_rep),
                             reports=database.getReports(),
                             lastreps=database.getLastReports(),
-                            answers=database.getAnswers(id_rep))
+                            answers=database.getAnswers(id_rep), games=database.getGames())
 
 #solving report
 @app.route('/reports/solve/<int:id_rep>', methods=['POST', 'GET'])
@@ -216,7 +216,7 @@ def game(url, id_game):
     id_game=random.randint(0, 999999999)
     if 'userlogged' in session:
         return render_template(f'/games/{url}.html', menu=database.getMenu(), status=database.getStatus(session['userlogged']),
-                                title=url)
+                                title=url, games=database.getGames())
     else:
         flash('Войдите в свой аккаунт', category='error')
         return redirect(url_for('start_page'))
@@ -226,7 +226,7 @@ def game(url, id_game):
 def books_list():
     db = connect_db()
     database = DataBase(db)
-    return render_template('books.html', menu=database.getMenu(), books=database.getBooks())
+    return render_template('books.html', menu=database.getMenu(), books=database.getBooks(), games=database.getGames())
 
 if __name__ == "__main__":
     app.run(debug=True)

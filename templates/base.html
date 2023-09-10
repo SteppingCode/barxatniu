@@ -20,8 +20,11 @@
             <a href="{{url_for('start_page')}}"><img src="/static/img/favicon.png" width="200" height="200" style="margin-top: -120px; margin-bottom: 70px;"></a>
             <div class="list_menu">
                 <ul>
+                    {% for g in games -%}
+                        <li><a href="{{url_for('game_choice', url=g.url)}}">{{g.title}}</a></li>
+                    {% endfor -%}
                     {% for m in menu -%}
-                        <li><a href="{{url_for('game_choice', url=m.url)}}">{{m.title}}</a></li>
+                        <li><a href="{{url_for(m.url)}}">{{m.title}}</a></li>
                     {% endfor -%}
                     {% if 'userlogged' in session %}
                         {% if status == 'admin' %}

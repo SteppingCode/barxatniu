@@ -5,14 +5,18 @@ html, body {
     height: 100%;
 }
 
-#wrapper {
+.wrapper {
     min-height: 100%;
+
     margin-bottom: 300px;
 }
 #wrapper:after {
     content: "";
     display: block;
 }
+
+
+
 
 h1 {
     padding: 10px;
@@ -45,7 +49,7 @@ h1 {
 
 .list_menu{
 	margin-bottom: 50px;
-	margin-right: 5 0px;
+	margin-right: 15px;
 	padding-right: 50px;
 	margin-left: -52px;
 }
@@ -61,15 +65,43 @@ h1 {
 	position: absolute;
 }
 
+@keyframes light {
+    0% {
+        opacity: .1;
+        left: -300px;
+    }
+    50% {
+        opacity: .6;
+        left: -270px;
+    }
+    75% {
+        opacity: .5;
+        left: -300px;
+    }
+    90% {
+        opacity: .4;
+        left: -280px;
+    }
+    95% {
+        opacity: .3;
+        left: -290px;
+    }
+    100% {
+        opacity: .2;
+        left: -300px;
+    }
+}
+
 .menu{
 	padding: 25vh 50px;
 	background: rgba(20, 20, 20, 0.5);
 	height: 100vh;
 	border-right: 7px solid red;
 	position: fixed;
-    opacity: .2;
+    opacity: .1;
 	left: -300px;
 	transition: 0.4s ease;
+	animation: light 1s;
 }
 .menu:hover{
 	left: 0;
