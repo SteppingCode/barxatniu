@@ -16,7 +16,8 @@
 <div class="wrapper">
     {%- block menu -%}
         <div class="menu">
-            <a href="{{url_for('start_page')}}"><img src="/static/img/favicon.png" width="200" height="200" style="margin-top: -120px; float: left; margin-left: 18px; margin-bottom: 70px;"></a>
+            <span></span>
+            <a href="{{url_for('start_page')}}"><img src="/static/img/favicon.png" width="200" height="200" style="margin-top: -120px; margin-bottom: 70px;"></a>
             <div class="list_menu">
                 <ul>
                     {% for m in menu -%}
@@ -61,7 +62,7 @@ window.onclick = function(event) {
 }
 </script>
 <footer>
-    <span id="author"><a href="{{url_for('start_page')}}"><img src="/static/img/favicon.png" width="40px" height="40px" style="margin-right: 12px;"></a> &copy; 2023 <a class="names" href="https://vk.com/z.stepin">Степин Е.А.</a>, <a class="names" href="https://vk.com/glebuuus">Палеев Г.А.</a> и <a class="names" href="https://vk.com/itopg">Удоратин И.О.</a></span>
+    <span id="author"><a href="{{url_for('start_page')}}"><img src="/static/img/favicon.png" width="60px" height="60px" style="margin-right: 12px; margin-bottom: -14px;"></a> &copy; 2023 <a class="names" href="https://vk.com/z.stepin">Степин Е.А.</a>, <a class="names" href="https://vk.com/glebuuus">Палеев Г.А.</a> и <a class="names" href="https://vk.com/itopg">Удоратин И.О.</a></span>
     <span id="other">
         <ul>
             <li><a href="https://github.com/dodik337/barxatniu">Source code</a></li>
