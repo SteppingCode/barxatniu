@@ -5,18 +5,14 @@ html, body {
     height: 100%;
 }
 
-.wrapper {
+#wrapper {
     min-height: 100%;
-
     margin-bottom: 300px;
 }
 #wrapper:after {
     content: "";
     display: block;
 }
-
-
-
 
 h1 {
     padding: 10px;
