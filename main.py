@@ -226,7 +226,7 @@ def game(url, id_game):
 def books_list():
     db = connect_db()
     database = DataBase(db)
-    return render_template('books.html', menu=database.getMenu(), books=database.getBooks(), games=database.getGames())
+    return render_template('books.html', menu=database.getMenu(), books=database.getBooks(), games=database.getGames(), title='Библиотека')
 
 if __name__ == "__main__":
     app.run(debug=True)

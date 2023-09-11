@@ -1,9 +1,58 @@
 {% extends 'base.html' %}
 {% block content %}
 {{ super() }}
-<div>
+<style>
+    body {
+        max-width: 100%;
+    }
+    .books {
+        margin-left: 160px;
+        margin-right: 160px;
+        padding-top: 50px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        position: absolute;
+    }
+    #single_book {
+        background: lightgray 50% / cover no-repeat;
+        border-radius: 36px;
+        border: 1px black solid;
+        margin-bottom: 20px;
+        padding: 20px;
+        width: 20%;
+    }
+    #read_button {
+        border: 1px black solid;
+        border-radius: 30px;
+        padding: 10px;
+        width: 280px;
+        height: 40px;
+        margin-left: 6px;
+        margin-right: 20px;
+        position: relative;
+        background-color: lightgreen;
+    }
+    #read_button:hover {
+        opacity: .6;
+    }
+    #read_button a {
+        color: white;
+        text-shadow: 0 0 20px orange;
+        font-size: 30px;
+        text-decoration: none;
+    }
+</style>
+<div class="books">
     {% if books %}
-        <img src="{{books.img_url}}">
+        {% for b in books %}
+            <div id="single_book">
+                <img src="{{b.img_url}}" style="left: 50%; transform: translate(-50%); position: relative;" width="300px" height="500px">
+                <p style="margin-left: 10px;">{{b.title}}</p>
+                <p style="margin-left: 10px;">{{b.description}}</p>
+                <p id="read_button" style="text-align: center;"><a href="{{b.url}}">Читать</a></p>
+            </div>
+        {% endfor %}
     {% endif %}
 </div>
 {% endblock %}

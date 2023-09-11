@@ -9,10 +9,6 @@ html, body {
     min-height: 100%;
     margin-bottom: 300px;
 }
-#wrapper:after {
-    content: "";
-    display: block;
-}
 
 h1 {
     padding: 10px;
@@ -98,6 +94,7 @@ h1 {
 	left: -300px;
 	transition: 0.4s ease;
 	animation: light 1s;
+	z-index: 2;
 }
 .menu:hover{
 	left: 0;
@@ -193,15 +190,23 @@ input:invalid {
 }
 
 footer {
-    display: inline-block;
-    position: absolute;
-    margin-top: 150%;
-    box-sizing: border-box;
+    position: fixed;
     width: 100%;
     padding: 50px;
     color: lightgrey;
     background-color: #3F412E;
     font-family: 'Disket Mono', sans-serif;
+    bottom: -260px;
+    left: 0;
+    border-top: 7px red solid;
+    z-index: 2;
+    opacity: .1;
+    transition: 0.4s ease;
+}
+
+footer:hover {
+    bottom: 0;
+    opacity: 1;
 }
 
 footer #author {
