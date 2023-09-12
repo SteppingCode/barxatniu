@@ -15,8 +15,12 @@
 <div class="wrapper">
 {% block content %}
     {%- block menu -%}
+        <div class="burger">
+            <span id="span_1"></span>
+            <span id="span_2"></span>
+            <span id="span_3"></span>
+        </div>
         <div class="menu">
-            <span></span>
             <a href="{{url_for('start_page')}}"><img src="/static/img/favicon.png" width="200" height="200" style="margin-top: -120px; margin-bottom: 70px;"></a>
             <div class="list_menu">
                 <ul>
