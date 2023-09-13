@@ -2,9 +2,6 @@
 {% block content %}
 {{ super() }}
 <style>
-    body {
-        max-width: 100%;
-    }
     .books {
         margin-left: 160px;
         margin-right: 160px;
@@ -40,6 +37,15 @@
         text-shadow: 0 0 20px orange;
         font-size: 30px;
         text-decoration: none;
+    }
+    @media (max-width: 720px) {
+        .books {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        #single_book {
+            width: auto;
+        }
     }
 </style>
 <div class="books">

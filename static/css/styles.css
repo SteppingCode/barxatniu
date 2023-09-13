@@ -232,3 +232,8 @@ footer a:hover {
             left: -290px;
         }
     }
+@media (max-width: 720px) {
+    footer #author {
+        font-size: 22px;
+    }
+}
