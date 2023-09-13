@@ -201,17 +201,6 @@ def quit():
     else:
         return redirect(url_for('start_page'))
 
-#game list
-@app.route('/game_list', methods=['POST', 'GET'])
-def game_list():
-    db = connect_db()
-    database = DataBase(db)
-    if 'userlogged' in session:
-        return render_template('game_list.html', title='Список игр', menu=database.getMenu(),\
-                                games=database.getGames(),
-                                status=database.getStatus(session['userlogged']))
-    return render_template('game_list.html', title='Список игр', menu=database.getMenu(), games=database.getGames())
-
 #game connect
 @app.route('/<url>/<int:id_game>', methods=['POST', 'GET'])
 def game(url, id_game):

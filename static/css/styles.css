@@ -2,7 +2,7 @@ html, body {
     font-size: 22px;
     margin: 0;
     padding: 0;
-    height: 100%;
+    background: #f9fcff linear-gradient(147deg, #f9fcff 0%, #dee4ea 74%) no-repeat;
 }
 
 .wrapper {
@@ -66,7 +66,7 @@ h1 {
     border-radius: 40px;
     margin-left: 10px;
     position: fixed;
-    z-index: 3;
+    z-index: 1;
 }
 .burger {
 }
@@ -85,10 +85,6 @@ h1 {
 	left: 0;
 	transition: 0.5s ease;
 	opacity: 1;
-}
-.menu:hover > .burger {
-    opacity: 0;
-    transition: 0.5s ease;
 }
 #log, #pass {
     width: auto;
