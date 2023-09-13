@@ -178,24 +178,13 @@ input:invalid {
 }
 
 footer {
-    position: fixed;
-    width: 100%;
     padding: 50px;
     color: lightgrey;
     background-color: #3F412E;
     font-family: 'Disket Mono', sans-serif;
-    bottom: -260px;
-    left: 0;
     border-top: 7px red solid;
-    z-index: 2;
-    opacity: .1;
     box-shadow: 0 0 50px rgba(0,0,0,0.5);
     transition: 0.4s ease;
-}
-
-footer:hover {
-    bottom: 0;
-    opacity: 1;
 }
 
 footer #author {

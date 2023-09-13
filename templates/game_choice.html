@@ -4,6 +4,8 @@
 <style>
   .content-block {
         display: flex;
+        height: 100%;
+        margin-left: 20px;
   }
   #id02 {
         display: none;
@@ -45,7 +47,7 @@
 <div class="content-block">
     <div>
       <h1 id="game_title">{{game['title']}}</h1>
-      <pre id="game_info">{{game['info']}}</pre>
+      <p id="game_info">{{game_info}}</p>
       {% if status == 'teacher' %}
         <a style="text-decoration: none; color: black;" href="{{url_for('game', url=game.url, id_game=id_game)}}" id="btn_start">Создать игру</a>
         <div id="id02" class="quiz">

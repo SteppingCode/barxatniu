@@ -2,7 +2,7 @@
 import os.path
 import random
 import sqlite3 as sq
-from flask import Flask, redirect, url_for, render_template, g, request, session, flash
+from flask import Flask, redirect, url_for, render_template, g, request, session, flash, Markup
 from config import Config
 from database.sqldb import DataBase
 import git
@@ -78,15 +78,19 @@ def register():
 def game_choice(url):
     db = connect_db()
     database = DataBase(db)
+    row = database.getGameByUrl(url)
+    game_info = row[2]
     if 'userlogged' in session:
         return render_template('game_choice.html', menu=database.getMenu(),
                                 title=database.getGameByUrl(url)['title'],
                                 status=database.getStatus(session['userlogged']),
-                                game=database.getGameByUrl(url), games=database.getGames(),
+                                game=database.getGame(url), games=database.getGames(),
+                                game_info=Markup(game_info),
                                 id_game=random.randint(0, 999999999))
     return render_template('game_choice.html', title=database.getGameByUrl(url)['title'],
                                 menu=database.getMenu(),
                                 game=database.getGameByUrl(url), games=database.getGames(),
+                                game_info=Markup(game_info),
                                 id_game=random.randint(0, 999999999))
 
 #admin page
