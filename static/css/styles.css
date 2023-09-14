@@ -3,6 +3,10 @@ html, body {
     margin: 0;
     padding: 0;
     background: #f9fcff linear-gradient(147deg, #f9fcff 0%, #dee4ea 74%) no-repeat;
+}
+
+.wrapper {
+    position: absolute;
     min-height: 100%;
 }
 
