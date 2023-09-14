@@ -97,7 +97,6 @@ h1 {
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
-    margin: 8px 0;
     border: none;
     cursor: pointer;
     width: 100%;
@@ -204,13 +203,14 @@ footer a:hover {
             margin-top: 50%;
             font-size: 35px;
             width: 75%;
-            height: 26%;
+        }
+        #regis-text {
+            font-size: 20px;
         }
         .modal-content input {
             font-size: 25px;
         }
         footer {
-            margin-top: 180%;
             font-size: 30px;
         }
         footer #other {
@@ -222,9 +222,6 @@ footer a:hover {
         footer #other ul li {
             margin-top: 26px;
             list-style-type: circle;
-        }
-        .menu {
-            left: -290px;
         }
     }
 @media (max-width: 720px) {
