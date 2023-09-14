@@ -5,11 +5,6 @@ html, body {
     background: #f9fcff linear-gradient(147deg, #f9fcff 0%, #dee4ea 74%) no-repeat;
 }
 
-.wrapper {
-    position: absolute;
-    min-height: 100%;
-}
-
 h1 {
     padding: 10px;
 }
