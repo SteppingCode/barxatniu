@@ -171,7 +171,7 @@ def report_solve(id_rep):
     database = DataBase(db)
     if 'userlogged' in session:
         if database.getReport(id_rep)['user'] == session['userlogged'] or \
-            database.getStatus(session['userlogged'] == 'admin'):
+            database.getStatus(session['userlogged']) == 'admin':
             database.UpdateReportStatus(id_rep)
             return redirect(url_for('reports_page'))
     return redirect(url_for('reports_page'))
