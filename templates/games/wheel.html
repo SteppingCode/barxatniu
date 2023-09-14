@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
+{{super()}}
 <style>
-  .wrapper * {
+  #wrapper * {
     box-sizing: border-box;
   }
 
-  .wrapper {
+  #wrapper {
     display: grid;
     place-items: center;
     overflow: hidden;
@@ -99,8 +100,6 @@
             animation: tick 700ms cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
-
-
   @keyframes tick {
     40% {
       transform: rotate(-12deg);
@@ -132,8 +131,11 @@
       transform: scale(1);
     }
   }
+  footer {
+    margin-top: 80%;
+  }
 </style>
-<div class="wrapper">
+<div id="wrapper">
   <div class="deal-wheel">
     <ul class="spinner"></ul>
     <div class="ticker"></div>

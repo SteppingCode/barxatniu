@@ -2,13 +2,7 @@
 {% block content %}
 {{ super() }}
 <style>
-    body {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-    }
     input {
-        width: auto;
         padding: 15px;
         margin: 5px 0 22px 0;
         border: none;
@@ -26,18 +20,18 @@
     .regis-content {
         border-radius: 15px;
         background-color: #fefefe;
-        margin: 10% auto 15% 30%;
+        margin-left: 50%;
+        transform: translate(-50%);
         border: 1px solid #888;
-        width: 35%;
-        height: auto;
-        position: absolute;
+        max-width: 35%;
         z-index: 1;
-        top: 0;
+        margin-top: 20px;
+    }
+    .menu {
+        margin-top: -20px;
     }
     #video-full {
-        z-index: -1;
-        overflow: hidden;
-        position: relative;
+        z-index: -2;
     }
     #idbtn1, #idbtn2 {
         border-radius: 10px;
@@ -81,39 +75,22 @@
         user-select: none;
     }
 
-    /* Checked */
     .form_radio_btn input[type=radio]:checked + label {
         background: #ffe0a6;
     }
 
-    /* Hover */
     .form_radio_btn label:hover {
         color: #666;
     }
 
-    /* Disabled */
     .form_radio_btn input[type=radio]:disabled + label {
         background: #efefef;
         color: #666;
     }
     footer {
-        margin-top: 50%;
+        margin-top: 20px;
     }
     @media (max-width: 992px) {
-        body {
-            background-color: grey;
-        }
-        #video-full {
-            display: none;
-        }
-        footer {
-            margin-top: 180%;
-        }
-        .regis-content {
-            margin-inline: 12.5%;
-            width: 75%;
-            margin-top: 35%;
-        }
         .container {
             font-size: 25px;
         }
@@ -129,30 +106,30 @@
         }
     }
 </style>
-<video id="video-full" src="/static/video/video2.mp4" width="100%" height="auto" loop muted autoplay typeof="mp4">
-</video>
-<form class="regis-content" method="post">
-    <div class="container">
-        <h1 style="text-align: center; text-transform: uppercase; font-family: Arial; font-size: 35px;">Регистрация</h1>
-        {% for cat, msg in get_flashed_messages(True) %}
-            <div class="flash {{cat}}"> {{msg}}</div>
-        {% endfor %}
-        <div style="display: flex; flex-direction: column; padding-top: 20px;">
-            <input type="text" placeholder="Логин" name="regnick" required pattern="[A-za-z1-0]*">
-            <input type="number" placeholder="Возраст" name="age" required pattern="[1-0 ]*">
-            <input type="text" placeholder="Полное имя" name="regname" required pattern="[А-яа-я ]*">
-            <input type="password" placeholder="Пароль" name="regpsw" required pattern="[A-za-z1-0]*">
-            <input type="password" placeholder="Повторите пароль" name="regpsw2" required pattern="[A-za-z1-0]*">
-            <div class="form_radio_btn">
-                <input id="radio-1" type="radio" name="radio" value="student" checked>
-                <label for="radio-1">Я ученик</label>
+<div>
+    <form class="regis-content" method="post">
+        <div class="container">
+            <h1 style="text-align: center; text-transform: uppercase; font-family: Arial; font-size: 35px;">Регистрация</h1>
+            {% for cat, msg in get_flashed_messages(True) %}
+                <div class="flash {{cat}}"> {{msg}}</div>
+            {% endfor %}
+            <div style="display: flex; flex-direction: column; padding-top: 20px;">
+                <input type="text" placeholder="Логин" name="regnick" required pattern="[A-za-z1-0]*">
+                <input type="number" placeholder="Возраст" name="age" required pattern="[1-0 ]*">
+                <input type="text" placeholder="Полное имя" name="regname" required pattern="[А-яа-я ]*">
+                <input type="password" placeholder="Пароль" name="regpsw" required pattern="[A-za-z1-0]*">
+                <input type="password" placeholder="Повторите пароль" name="regpsw2" required pattern="[A-za-z1-0]*">
+                <div class="form_radio_btn">
+                    <input id="radio-1" type="radio" name="radio" value="student" checked>
+                    <label for="radio-1">Я ученик</label>
+                </div>
+                <div class="form_radio_btn">
+                    <input id="radio-2" type="radio" name="radio" value="teacher">
+                    <label for="radio-2">Я учитель</label>
+                </div>
             </div>
-            <div class="form_radio_btn">
-                <input id="radio-2" type="radio" name="radio" value="teacher">
-                <label for="radio-2">Я учитель</label>
-            </div>
+            <button id="btn" type="submit" class="signupbtn">Зарегистрироваться</button>
         </div>
-        <button id="btn" type="submit" class="signupbtn">Зарегистрироваться</button>
-    </div>
-</form>
+    </form>
+</div>
 {% endblock %}

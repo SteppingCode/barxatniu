@@ -84,7 +84,7 @@ def game_choice(url):
         return render_template('game_choice.html', menu=database.getMenu(),
                                 title=database.getGameByUrl(url)['title'],
                                 status=database.getStatus(session['userlogged']),
-                                game=database.getGame(url), games=database.getGames(),
+                                game=database.getGameByUrl(url), games=database.getGames(),
                                 game_info=Markup(game_info),
                                 id_game=random.randint(0, 999999999))
     return render_template('game_choice.html', title=database.getGameByUrl(url)['title'],
@@ -153,12 +153,7 @@ def showReport(id_rep):
     if 'userlogged' in session:
         if request.method == 'POST':
             if database.addAnswers(session['userlogged'], request.form['text'], id_rep):
-                return render_template('report_page.html', title=title, menu=database.getMenu(),
-                                       status=database.getStatus(session['userlogged']),
-                                       report=database.getReport(id_rep),
-                                       reports=database.getReports(),
-                                       lastreps=database.getLastReports(),
-                                       answers=database.getAnswers(id_rep), games=database.getGames())
+                return redirect(url_for('showReport', id_rep=id_rep))
         return render_template('report_page.html', title=title, menu=database.getMenu(),
                                 status=database.getStatus(session['userlogged']), report=database.getReport(id_rep),
                                 reports=database.getReports(),

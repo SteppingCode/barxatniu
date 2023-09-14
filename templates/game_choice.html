@@ -7,9 +7,6 @@
         height: 100%;
         margin-left: 20px;
   }
-  #id02 {
-        display: none;
-  }
   #game_title {
         margin: 50px;
   }
@@ -31,13 +28,17 @@
         display: flex;
         align-items: column;
   }
-  #btn_start, #btn_end {
+  #btn_start {
         margin-left: 70%;
         transform: translate(-50%, 50%);
         border: 1px black solid;
         border-radius: 20px;
         padding: 16px;
         font-size: 24px;
+        background-color: lightgreen;
+  }
+  footer {
+    margin-top: 80%;
   }
   @media (max-width: 992px) {
 
@@ -49,19 +50,9 @@
       <h1 id="game_title">{{game['title']}}</h1>
       <p id="game_info">{{game_info}}</p>
       {% if status == 'teacher' %}
-        <a style="text-decoration: none; color: black;" href="{{url_for('game', url=game.url, id_game=id_game)}}" id="btn_start">Создать игру</a>
-        <div id="id02" class="quiz">
-            <form class="quiz-content" method="post" action="{{url_for('game', url=game['url'], id_game=id_game)}}">
-              <div class="cont">
-                <label><input placeholder="Добавить вопрос" required><button id="addquest" type="button">&plus;</button></label>
-                <label><input placeholder="Вариант ответа" required><button id="addans" type="button">&plus;</button></label>
-              </div>
-                <button type="submit">Подтвердить</button>
-            </form>
-        </div>
+        <a id="btn_start" style="text-decoration: none; color: black;" href="{{url_for('game', url=game.url, id_game=id_game)}}">Создать игру</a>
       {% endif %}
     </div>
 </div>
-<script></script>
 {% endif %}
 {% endblock %}
