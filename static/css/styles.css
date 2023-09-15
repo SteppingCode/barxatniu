@@ -224,7 +224,7 @@ footer a:hover {
             list-style-type: circle;
         }
     }
-@media (max-width: 720px) {
+@media (min-width: 720px) {
     footer #author {
         font-size: 22px;
     }
